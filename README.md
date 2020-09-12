@@ -1,12 +1,16 @@
 # esusnotifica
 
-O pacote R **esusnotifica** inclui a funÁ„o genÈrica **clean_esus** que executa uma sÈrie de instruÁıes de curadoria dos dados do e-SUS Notifica. 
+O pacote R **esusnotifica** inclui a fun√ß√£o gen√©rica **clean_esus** que executa uma s√©rie de instru√ß√µes de curadoria dos dados do e-SUS Notifica. 
 
-Adicionalmente, pretende-se que este repositÛrio configure um ambiente colaborativo de desenvolvimento de soluÁıes computacionais para o trabalho com dados do e-SUS Notifica. InformaÁıes adiconais est„o disponÌveis em https://osf.io/quvsf/.
+O p√∫blico-alvo do pacote **esusnotifica** abarca gestores e t√©cnicos das Secretarias Estaduais e Municipais de Sa√∫de e do Minist√©rio da Sa√∫de.
+
+Espera-se que este reposit√≥rio configure um ambiente colaborativo de desenvolvimento de solu√ß√µes computacionais para o trabalho com dados do e-SUS Notifica. 
+
+Informa√ß√µes adiconais est√£o dispon√≠veis em https://osf.io/quvsf/.
 
 ## Como instalar?
 
-Este pacote **em desenvolvimento** pode ser instalado no R executando os cÛdigos abaixo:
+Este pacote **em desenvolvimento** pode ser instalado no R executando os c√≥digos abaixo:
 
 ```{r}
 install.packages("devtools")
@@ -15,14 +19,13 @@ devtools::install_github("ronaldoalves-ms/esusnotifica")
 
 ## Como usar?
 
-A funÁ„o **clean_esus** È aplicada aos dados do e-SUS Notifica, conforme exemplo a seguir:
+A fun√ß√£o **clean_esus** √© aplicada aos dados do e-SUS Notifica, conforme exemplo a seguir.
 
 ```r
 library(esusnotifica)
 dados_esus <- clean_esus(dados_esus)
 ```
 
-
-## D˙vidas e sugestıes
+## D√∫vidas e sugest√µes
 
 Crie uma [issue](https://github.com/ronaldoalves-ms/esusnotifica/issues) no projeto ou envie um e-mail para ronaldo.alves@saude.gov.br
