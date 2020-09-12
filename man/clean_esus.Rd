@@ -44,7 +44,7 @@ Coordenação Geral de Informações e Análises Epidemiológicas, Departamento 
 }
 
 \examples{
-esusve-uf <- clean_esus(esusve-uf)
+dados_esus <- clean_esus(dados_esus)
 
 }
 
