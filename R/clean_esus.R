@@ -1,10 +1,10 @@
 #' Curadoria dos Dados do e-SUS Notifica 
 #'
-#' \code{clean_esus} Ã© uma funÃ§Ã£o genÃ©rica para o prÃ©-processamento dos dados do e-SUS Notifica.
+#' \code{clean_esus} e uma funcao generica para o pre-processamento dos dados do e-SUS Notifica.
 #'
 #' @param dados Um data frame contendo os dados do e-SUS Notifica.
 #'
-#' @return A funÃ§Ã£o retorna um data frame com dados tratados do e-SUS Notifica.
+#' @return A funcao retorna um data frame com dados tratados do e-SUS Notifica.
 #'
 #' @examples
 #' esusve-uf <- clean_esus(esusve-uf)
@@ -15,13 +15,14 @@
 
 # PACOTES INSTALADOS PARALELAMENTE
 
-usethis::use_package("dplyr", type = "Imports")
-usethis::use_package("lubridate", type = "Imports")
-usethis::use_package("stringr", type = "Imports")
-usethis::use_package("abjutils", type = "Imports")
+#usethis::use_package("magrittr", type = "Imports")
+#usethis::use_package("dplyr", type = "Imports")
+#usethis::use_package("lubridate", type = "Imports")
+#usethis::use_package("stringr", type = "Imports")
+#usethis::use_package("abjutils", type = "Imports")
 
 
-usethis::use_pipe(export = TRUE)
+#usethis::use_pipe(export = TRUE)
 
 
 
