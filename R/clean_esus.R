@@ -358,6 +358,40 @@ clean_esus <- function(dados){
   }
   
   
+  # MUNICIPIO DE RESIDENCIA
+  
+  if("municipio" %in% nomesVars){
+    
+    dados$municipio <- as.character(dados$municipio)
+    
+    dados$municipio <- rm_accent(dados$municipio)
+    dados$municipio <- str_replace_all(dados$municipio, "[^[:alpha:]]", " ")
+    dados$municipio <- str_to_upper(dados$municipio)
+    dados$municipio <- str_trim(dados$municipio, side = "both")
+    dados$municipio <- str_squish(dados$municipio)
+    
+    dados$municipio[dados$municipio == ""] <- NA
+    
+  }
+  
+  
+  # MUNICIPIO DE NOTIFICACAO
+  
+  if("municipioNotificacao" %in% nomesVars){
+    
+    dados$municipioNotificacao <- as.character(dados$municipioNotificacao)
+    
+    dados$municipioNotificacao <- rm_accent(dados$municipioNotificacao)
+    dados$municipioNotificacao <- str_replace_all(dados$municipioNotificacao, "[^[:alpha:]]", " ")
+    dados$municipioNotificacao <- str_to_upper(dados$municipioNotificacao)
+    dados$municipioNotificacao <- str_trim(dados$municipioNotificacao, side = "both")
+    dados$municipioNotificacao <- str_squish(dados$municipioNotificacao)
+    
+    dados$municipioNotificacao[dados$municipioNotificacao == ""] <- NA
+    
+  }
+  
+    
   # RESULTADO DO TESTE
   
   if("resultadoTeste" %in% nomesVars){
@@ -560,6 +594,40 @@ clean_esus <- function(dados){
   }
   
   
+  # SINTOMAS
+  
+  if("sintomas" %in% nomesVars){
+    
+    dados$sintomas <- as.character(dados$sintomas)
+    
+    dados$sintomas <- abjutils::rm_accent(dados$sintomas)
+    dados$sintomas <- stringr::str_remove_all(dados$sintomas, "[[:digit:]]")
+    dados$sintomas <- stringr::str_to_upper(dados$sintomas)
+    dados$sintomas <- stringr::str_trim(dados$sintomas, side = "both")
+    dados$sintomas <- stringr::str_squish(dados$sintomas)
+    
+    dados$sintomas[dados$sintomas == ""] <- NA
+    
+  }
+  
+  
+  # CONDICOES
+  
+  if("condicoes" %in% nomesVars){
+    
+    dados$condicoes <- as.character(dados$condicoes)
+    
+    dados$condicoes <- abjutils::rm_accent(dados$condicoes)
+    dados$condicoes <- stringr::str_remove_all(dados$condicoes, "[[:digit:]]")
+    dados$condicoes <- stringr::str_to_upper(dados$condicoes)
+    dados$condicoes <- stringr::str_trim(dados$condicoes, side = "both")
+    dados$condicoes <- stringr::str_squish(dados$condicoes)
+    
+    dados$condicoes[dados$condicoes == ""] <- NA
+    
+  }
+  
+  
   ## PARTE 2
   
   
@@ -593,9 +661,18 @@ clean_esus <- function(dados){
     dados = dados %>% dplyr::mutate(
       classificacaoFinal = dplyr::case_when(
         resultadoTeste == "1" ~ "2",
+        
         resultadoTeste != "1" & classificacaoFinal == "2" ~ "3",
         resultadoTeste == "2" & is.na(classificacaoFinal) ~ "1",
+        
+        resultadoTesteSorologicoIgA == "1" ~ "2",
+        resultadoTesteSorologicoIgG == "1" ~ "2",
+        resultadoTesteSorologicoIgM == "1" ~ "2",
+        resultadoTesteSorologicoTotais == "1" ~ "2",
+        
         TRUE ~ classificacaoFinal))
+    
+    
     
   }
   
