@@ -711,6 +711,14 @@ clean_esus <- function(dados){
   }
   
   
+  ## PARTE 3
+  
+  
+  # SEMANA EPIDEMIOLOGICA (3)
+  
+  dados$semEpiSintomas <- lubridate::epiweek(dados$dataInicioSintomas)
+  
+  
   # PURGE LEVELS
   
   dados <- droplevels(dados)
