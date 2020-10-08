@@ -276,11 +276,11 @@ clean_esus <- function(dados){
     
     dados$estado <- as.character(dados$estado)
     
-    dados$estado <- rm_accent(dados$estado)
-    dados$estado <- str_replace_all(dados$estado, "[^[:alpha:]]", " ")
-    dados$estado <- str_to_upper(dados$estado)
-    dados$estado <- str_trim(dados$estado, side = "both")
-    dados$estado <- str_squish(dados$estado)
+    dados$estado <- abjutils::rm_accent(dados$estado)
+    dados$estado <- stringr::str_replace_all(dados$estado, "[^[:alpha:]]", " ")
+    dados$estado <- stringr::str_to_upper(dados$estado)
+    dados$estado <- stringr::str_trim(dados$estado, side = "both")
+    dados$estado <- stringr::str_squish(dados$estado)
     
     dados$estado[dados$estado == ""] <- NA
     dados$estado[dados$estado == "ACRE"] <- "AC"
@@ -320,11 +320,11 @@ clean_esus <- function(dados){
     
     dados$estadoNotificacao <- as.character(dados$estadoNotificacao)
     
-    dados$estadoNotificacao <- rm_accent(dados$estadoNotificacao)
-    dados$estadoNotificacao <- str_replace_all(dados$estadoNotificacao, "[^[:alpha:]]", " ")
-    dados$estadoNotificacao <- str_to_upper(dados$estadoNotificacao)
-    dados$estadoNotificacao <- str_trim(dados$estadoNotificacao, side = "both")
-    dados$estadoNotificacao <- str_squish(dados$estadoNotificacao)
+    dados$estadoNotificacao <- abjutils::rm_accent(dados$estadoNotificacao)
+    dados$estadoNotificacao <- stringr::str_replace_all(dados$estadoNotificacao, "[^[:alpha:]]", " ")
+    dados$estadoNotificacao <- stringr::str_to_upper(dados$estadoNotificacao)
+    dados$estadoNotificacao <- stringr::str_trim(dados$estadoNotificacao, side = "both")
+    dados$estadoNotificacao <- stringr::str_squish(dados$estadoNotificacao)
     
     dados$estadoNotificacao[dados$estadoNotificacao == ""] <- NA
     dados$estadoNotificacao[dados$estadoNotificacao == "ACRE"] <- "AC"
@@ -364,11 +364,11 @@ clean_esus <- function(dados){
     
     dados$municipio <- as.character(dados$municipio)
     
-    dados$municipio <- rm_accent(dados$municipio)
-    dados$municipio <- str_replace_all(dados$municipio, "[^[:alpha:]]", " ")
-    dados$municipio <- str_to_upper(dados$municipio)
-    dados$municipio <- str_trim(dados$municipio, side = "both")
-    dados$municipio <- str_squish(dados$municipio)
+    dados$municipio <- abjutils::rm_accent(dados$municipio)
+    dados$municipio <- stringr::str_replace_all(dados$municipio, "[^[:alpha:]]", " ")
+    dados$municipio <- stringr::str_to_upper(dados$municipio)
+    dados$municipio <- stringr::str_trim(dados$municipio, side = "both")
+    dados$municipio <- stringr::str_squish(dados$municipio)
     
     dados$municipio[dados$municipio == ""] <- NA
     
@@ -381,17 +381,51 @@ clean_esus <- function(dados){
     
     dados$municipioNotificacao <- as.character(dados$municipioNotificacao)
     
-    dados$municipioNotificacao <- rm_accent(dados$municipioNotificacao)
-    dados$municipioNotificacao <- str_replace_all(dados$municipioNotificacao, "[^[:alpha:]]", " ")
-    dados$municipioNotificacao <- str_to_upper(dados$municipioNotificacao)
-    dados$municipioNotificacao <- str_trim(dados$municipioNotificacao, side = "both")
-    dados$municipioNotificacao <- str_squish(dados$municipioNotificacao)
+    dados$municipioNotificacao <- abjutils::rm_accent(dados$municipioNotificacao)
+    dados$municipioNotificacao <- stringr::str_replace_all(dados$municipioNotificacao, "[^[:alpha:]]", " ")
+    dados$municipioNotificacao <- stringr::str_to_upper(dados$municipioNotificacao)
+    dados$municipioNotificacao <- stringr::str_trim(dados$municipioNotificacao, side = "both")
+    dados$municipioNotificacao <- stringr::str_squish(dados$municipioNotificacao)
     
     dados$municipioNotificacao[dados$municipioNotificacao == ""] <- NA
     
   }
   
+  
+  # CBO
+  
+  if("cbo" %in% nomesVars){
     
+    dados$cbo <- as.character(dados$cbo)
+    
+    dados$cbo <- abjutils::rm_accent(dados$cbo)
+    dados$cbo <- stringr::str_replace_all(dados$cbo, "[^[:alpha:]]", " ")
+    dados$cbo <- stringr::str_to_upper(dados$cbo)
+    dados$cbo <- stringr::str_trim(dados$cbo, side = "both")
+    dados$cbo <- stringr::str_squish(dados$cbo)
+    
+    dados$cbo[dados$cbo == ""] <- NA
+    
+  }
+  
+  
+  # PAIS DE ORIGEM
+  
+  if("paisOrigem" %in% nomesVars){
+    
+    dados$paisOrigem <- as.character(dados$paisOrigem)
+    
+    dados$paisOrigem <- abjutils::rm_accent(dados$paisOrigem)
+    dados$paisOrigem <- stringr::str_replace_all(dados$paisOrigem, "[^[:alpha:]]", " ")
+    dados$paisOrigem <- stringr::str_to_upper(dados$paisOrigem)
+    dados$paisOrigem <- stringr::str_trim(dados$paisOrigem, side = "both")
+    dados$paisOrigem <- stringr::str_squish(dados$paisOrigem)
+    
+    dados$paisOrigem[dados$paisOrigem == ""] <- NA
+    
+  }
+  
+   
   # RESULTADO DO TESTE
   
   if("resultadoTeste" %in% nomesVars){
