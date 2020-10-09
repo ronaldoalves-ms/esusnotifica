@@ -6,7 +6,7 @@ O público-alvo do pacote **esusnotifica** abarca gestores e técnicos das Secre
 
 Espera-se que este repositório configure um ambiente colaborativo de desenvolvimento de soluções computacionais para o trabalho com dados do e-SUS Notifica. 
 
-Informações adiconais estão disponíveis em https://osf.io/quvsf/.
+Informações adicionais estão disponíveis em https://datasus.saude.gov.br/notifica/.
 
 ## Como instalar?
 
