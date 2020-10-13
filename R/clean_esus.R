@@ -399,7 +399,7 @@ clean_esus <- function(dados){
     dados$cbo <- as.character(dados$cbo)
     
     dados$cbo <- abjutils::rm_accent(dados$cbo)
-    dados$cbo <- stringr::str_replace_all(dados$cbo, "[^[:alpha:]]", " ")
+    dados$cbo <- stringr::str_replace_all(dados$cbo, "[^[:alnum:]]", " ")
     dados$cbo <- stringr::str_to_upper(dados$cbo)
     dados$cbo <- stringr::str_trim(dados$cbo, side = "both")
     dados$cbo <- stringr::str_squish(dados$cbo)
