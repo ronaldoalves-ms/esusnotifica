@@ -665,17 +665,6 @@ clean_esus <- function(dados){
   ## PARTE 2
   
   
-  # RESULTADO DO TESTE (2)
-  
-  if("resultadoTeste" %in% nomesVars){
-    
-    dados = dados %>% dplyr::mutate(
-      resultadoTeste = dplyr::case_when(classificacaoFinal == "2" ~ "1",
-                                        TRUE ~ resultadoTeste))
-    
-  }
-  
-  
   # ESTADO DO TESTE (2)
   
   if("estadoTeste" %in% nomesVars){
@@ -696,13 +685,12 @@ clean_esus <- function(dados){
       classificacaoFinal = dplyr::case_when(
         resultadoTeste == "1" ~ "2",
         
-        resultadoTeste != "1" & classificacaoFinal == "2" ~ "3",
-        resultadoTeste == "2" & is.na(classificacaoFinal) ~ "1",
-        
         resultadoTesteSorologicoIgA == "1" ~ "2",
         resultadoTesteSorologicoIgG == "1" ~ "2",
         resultadoTesteSorologicoIgM == "1" ~ "2",
         resultadoTesteSorologicoTotais == "1" ~ "2",
+        
+        resultadoTeste != "1" & classificacaoFinal == "2" ~ "3",
         
         TRUE ~ classificacaoFinal))
     
