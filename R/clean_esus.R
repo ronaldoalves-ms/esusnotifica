@@ -219,6 +219,8 @@ clean_esus <- function(dados){
   
   if("idade" %in% nomesVars){
     
+    dados$idade <- NA
+    dados$idade <- lubridate::time_length(lubridate::interval(dados$dataNascimento, dados$dataInicioSintomas), unit = "year")
     dados$idade <- as.integer(dados$idade)
     dados$idade[dados$idade == 0] <- NA
     
@@ -250,7 +252,7 @@ clean_esus <- function(dados){
     
     dados$profissionalSeguranca[dados$profissionalSeguranca == ""] <- NA
     dados$profissionalSeguranca[dados$profissionalSeguranca == "SIM"] <- "1"
-    dados$profissionalSeguranca[dados$profissionalSeguranca == "NAO"] <- "2"
+    dados$profissionalSeguranca[dados$profissionalSeguranca == "NAO"] <- "0"
     
   }
   
@@ -265,7 +267,7 @@ clean_esus <- function(dados){
     
     dados$estrangeiro[dados$estrangeiro == ""] <- NA
     dados$estrangeiro[dados$estrangeiro == "SIM"] <- "1"
-    dados$estrangeiro[dados$estrangeiro == "NAO"] <- "2"
+    dados$estrangeiro[dados$estrangeiro == "NAO"] <- "0"
     
   }
   
@@ -283,33 +285,33 @@ clean_esus <- function(dados){
     dados$estado <- stringr::str_squish(dados$estado)
     
     dados$estado[dados$estado == ""] <- NA
-    dados$estado[dados$estado == "ACRE"] <- "AC"
-    dados$estado[dados$estado == "ALAGOAS"] <- "AL"
-    dados$estado[dados$estado == "AMAPA"] <- "AP"
-    dados$estado[dados$estado == "AMAZONAS"] <- "AM"
-    dados$estado[dados$estado == "BAHIA"] <- "BA"
-    dados$estado[dados$estado == "CEARA"] <- "CE"
-    dados$estado[dados$estado == "DISTRITO FEDERAL"] <- "DF"
-    dados$estado[dados$estado == "ESPIRITO SANTO"] <- "ES"
-    dados$estado[dados$estado == "GOIAS"] <- "GO"
-    dados$estado[dados$estado == "MARANHAO"] <- "MA"
-    dados$estado[dados$estado == "MATO GROSSO"] <- "MT"
-    dados$estado[dados$estado == "MATO GROSSO DO SUL"] <- "MS"
-    dados$estado[dados$estado == "MINAS GERAIS"] <- "MG"
-    dados$estado[dados$estado == "PARA"] <- "PA"
-    dados$estado[dados$estado == "PARAIBA"] <- "PB"
-    dados$estado[dados$estado == "PARANA"] <- "PR"
-    dados$estado[dados$estado == "PERNAMBUCO"] <- "PE"
-    dados$estado[dados$estado == "PIAUI"] <- "PI"
-    dados$estado[dados$estado == "RIO DE JANEIRO"] <- "RJ"
-    dados$estado[dados$estado == "RIO GRANDE DO NORTE"] <- "RN"
-    dados$estado[dados$estado == "RIO GRANDE DO SUL"] <- "RS"
-    dados$estado[dados$estado == "RONDONIA"] <- "RO"
-    dados$estado[dados$estado == "RORAIMA"] <- "RR"
-    dados$estado[dados$estado == "SANTA CATARINA"] <- "SC"
-    dados$estado[dados$estado == "SAO PAULO"] <- "SP"
-    dados$estado[dados$estado == "SERGIPE"] <- "SE"
-    dados$estado[dados$estado == "TOCANTINS"] <- "TO"
+    dados$estado[dados$estado == "ACRE"] <- "12"
+    dados$estado[dados$estado == "ALAGOAS"] <- "27"
+    dados$estado[dados$estado == "AMAPA"] <- "16"
+    dados$estado[dados$estado == "AMAZONAS"] <- "13"
+    dados$estado[dados$estado == "BAHIA"] <- "29"
+    dados$estado[dados$estado == "CEARA"] <- "23"
+    dados$estado[dados$estado == "DISTRITO FEDERAL"] <- "53"
+    dados$estado[dados$estado == "ESPIRITO SANTO"] <- "32"
+    dados$estado[dados$estado == "GOIAS"] <- "52"
+    dados$estado[dados$estado == "MARANHAO"] <- "21"
+    dados$estado[dados$estado == "MATO GROSSO"] <- "51"
+    dados$estado[dados$estado == "MATO GROSSO DO SUL"] <- "50"
+    dados$estado[dados$estado == "MINAS GERAIS"] <- "31"
+    dados$estado[dados$estado == "PARA"] <- "15"
+    dados$estado[dados$estado == "PARAIBA"] <- "25"
+    dados$estado[dados$estado == "PARANA"] <- "41"
+    dados$estado[dados$estado == "PERNAMBUCO"] <- "26"
+    dados$estado[dados$estado == "PIAUI"] <- "22"
+    dados$estado[dados$estado == "RIO DE JANEIRO"] <- "33"
+    dados$estado[dados$estado == "RIO GRANDE DO NORTE"] <- "24"
+    dados$estado[dados$estado == "RIO GRANDE DO SUL"] <- "43"
+    dados$estado[dados$estado == "RONDONIA"] <- "11"
+    dados$estado[dados$estado == "RORAIMA"] <- "14"
+    dados$estado[dados$estado == "SANTA CATARINA"] <- "42"
+    dados$estado[dados$estado == "SAO PAULO"] <- "35"
+    dados$estado[dados$estado == "SERGIPE"] <- "28"
+    dados$estado[dados$estado == "TOCANTINS"] <- "17"
     
   }
   
@@ -327,33 +329,33 @@ clean_esus <- function(dados){
     dados$estadoNotificacao <- stringr::str_squish(dados$estadoNotificacao)
     
     dados$estadoNotificacao[dados$estadoNotificacao == ""] <- NA
-    dados$estadoNotificacao[dados$estadoNotificacao == "ACRE"] <- "AC"
-    dados$estadoNotificacao[dados$estadoNotificacao == "ALAGOAS"] <- "AL"
-    dados$estadoNotificacao[dados$estadoNotificacao == "AMAPA"] <- "AP"
-    dados$estadoNotificacao[dados$estadoNotificacao == "AMAZONAS"] <- "AM"
-    dados$estadoNotificacao[dados$estadoNotificacao == "BAHIA"] <- "BA"
-    dados$estadoNotificacao[dados$estadoNotificacao == "CEARA"] <- "CE"
-    dados$estadoNotificacao[dados$estadoNotificacao == "DISTRITO FEDERAL"] <- "DF"
-    dados$estadoNotificacao[dados$estadoNotificacao == "ESPIRITO SANTO"] <- "ES"
-    dados$estadoNotificacao[dados$estadoNotificacao == "GOIAS"] <- "GO"
-    dados$estadoNotificacao[dados$estadoNotificacao == "MARANHAO"] <- "MA"
-    dados$estadoNotificacao[dados$estadoNotificacao == "MATO GROSSO"] <- "MT"
-    dados$estadoNotificacao[dados$estadoNotificacao == "MATO GROSSO DO SUL"] <- "MS"
-    dados$estadoNotificacao[dados$estadoNotificacao == "MINAS GERAIS"] <- "MG"
-    dados$estadoNotificacao[dados$estadoNotificacao == "PARA"] <- "PA"
-    dados$estadoNotificacao[dados$estadoNotificacao == "PARAIBA"] <- "PB"
-    dados$estadoNotificacao[dados$estadoNotificacao == "PARANA"] <- "PR"
-    dados$estadoNotificacao[dados$estadoNotificacao == "PERNAMBUCO"] <- "PE"
-    dados$estadoNotificacao[dados$estadoNotificacao == "PIAUI"] <- "PI"
-    dados$estadoNotificacao[dados$estadoNotificacao == "RIO DE JANEIRO"] <- "RJ"
-    dados$estadoNotificacao[dados$estadoNotificacao == "RIO GRANDE DO NORTE"] <- "RN"
-    dados$estadoNotificacao[dados$estadoNotificacao == "RIO GRANDE DO SUL"] <- "RS"
-    dados$estadoNotificacao[dados$estadoNotificacao == "RONDONIA"] <- "RO"
-    dados$estadoNotificacao[dados$estadoNotificacao == "RORAIMA"] <- "RR"
-    dados$estadoNotificacao[dados$estadoNotificacao == "SANTA CATARINA"] <- "SC"
-    dados$estadoNotificacao[dados$estadoNotificacao == "SAO PAULO"] <- "SP"
-    dados$estadoNotificacao[dados$estadoNotificacao == "SERGIPE"] <- "SE"
-    dados$estadoNotificacao[dados$estadoNotificacao == "TOCANTINS"] <- "TO"
+    dados$estadoNotificacao[dados$estadoNotificacao == "ACRE"] <- "12"
+    dados$estadoNotificacao[dados$estadoNotificacao == "ALAGOAS"] <- "27"
+    dados$estadoNotificacao[dados$estadoNotificacao == "AMAPA"] <- "16"
+    dados$estadoNotificacao[dados$estadoNotificacao == "AMAZONAS"] <- "13"
+    dados$estadoNotificacao[dados$estadoNotificacao == "BAHIA"] <- "29"
+    dados$estadoNotificacao[dados$estadoNotificacao == "CEARA"] <- "23"
+    dados$estadoNotificacao[dados$estadoNotificacao == "DISTRITO FEDERAL"] <- "53"
+    dados$estadoNotificacao[dados$estadoNotificacao == "ESPIRITO SANTO"] <- "32"
+    dados$estadoNotificacao[dados$estadoNotificacao == "GOIAS"] <- "52"
+    dados$estadoNotificacao[dados$estadoNotificacao == "MARANHAO"] <- "21"
+    dados$estadoNotificacao[dados$estadoNotificacao == "MATO GROSSO"] <- "51"
+    dados$estadoNotificacao[dados$estadoNotificacao == "MATO GROSSO DO SUL"] <- "50"
+    dados$estadoNotificacao[dados$estadoNotificacao == "MINAS GERAIS"] <- "31"
+    dados$estadoNotificacao[dados$estadoNotificacao == "PARA"] <- "15"
+    dados$estadoNotificacao[dados$estadoNotificacao == "PARAIBA"] <- "25"
+    dados$estadoNotificacao[dados$estadoNotificacao == "PARANA"] <- "41"
+    dados$estadoNotificacao[dados$estadoNotificacao == "PERNAMBUCO"] <- "26"
+    dados$estadoNotificacao[dados$estadoNotificacao == "PIAUI"] <- "22"
+    dados$estadoNotificacao[dados$estadoNotificacao == "RIO DE JANEIRO"] <- "33"
+    dados$estadoNotificacao[dados$estadoNotificacao == "RIO GRANDE DO NORTE"] <- "24"
+    dados$estadoNotificacao[dados$estadoNotificacao == "RIO GRANDE DO SUL"] <- "43"
+    dados$estadoNotificacao[dados$estadoNotificacao == "RONDONIA"] <- "11"
+    dados$estadoNotificacao[dados$estadoNotificacao == "RORAIMA"] <- "14"
+    dados$estadoNotificacao[dados$estadoNotificacao == "SANTA CATARINA"] <- "42"
+    dados$estadoNotificacao[dados$estadoNotificacao == "SAO PAULO"] <- "35"
+    dados$estadoNotificacao[dados$estadoNotificacao == "SERGIPE"] <- "28"
+    dados$estadoNotificacao[dados$estadoNotificacao == "TOCANTINS"] <- "17"
     
   }
   
@@ -539,8 +541,8 @@ clean_esus <- function(dados){
     dados$estadoTeste <- stringr::str_squish(dados$estadoTeste)
     
     dados$estadoTeste[dados$estadoTeste == "SOLICITADO"] <- "1"
-    dados$estadoTeste[dados$estadoTeste == "CONCLUIDO"] <- "2"
-    dados$estadoTeste[dados$estadoTeste == "COLETADO"] <- "3"
+    dados$estadoTeste[dados$estadoTeste == "COLETADO"] <- "2"
+    dados$estadoTeste[dados$estadoTeste == "CONCLUIDO"] <- "3"
     dados$estadoTeste[dados$estadoTeste == "EXAME NAO SOLICITADO"] <- "4"
     
     dados$estadoTeste[dados$estadoTeste == ""] <- NA
@@ -565,9 +567,9 @@ clean_esus <- function(dados){
     dados$tipoTeste[dados$tipoTeste == "TESTE RAPIDO ANTIGENO"] <- "3"
     dados$tipoTeste[dados$tipoTeste == "ENZIMAIMUNOENSAIO ELISA IGM"] <- "4"
     dados$tipoTeste[dados$tipoTeste == "ENZIMAIMUNOENSAIO ELISA"] <- "4"
-    dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA IGG"] <- "5"
-    dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA"] <- "5"
-    dados$tipoTeste[dados$tipoTeste == "QUIMIOLUMINESCENCIA CLIA"] <- "6"
+    dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA IGG"] <- "4"
+    dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA"] <- "4"
+    dados$tipoTeste[dados$tipoTeste == "QUIMIOLUMINESCENCIA CLIA"] <- "4"
     
     dados$tipoTeste[dados$tipoTeste == ""] <- NA
     
@@ -670,8 +672,8 @@ clean_esus <- function(dados){
   if("estadoTeste" %in% nomesVars){
     
     dados = dados %>% dplyr::mutate(
-      estadoTeste = dplyr::case_when(!is.na(resultadoTeste) ~ "2",
-                                     is.na(resultadoTeste) & !is.na(dataTeste) ~ "3",
+      estadoTeste = dplyr::case_when(is.na(resultadoTeste) & !is.na(dataTeste) ~ "2",
+                                     !is.na(resultadoTeste) ~ "3",
                                      TRUE ~ estadoTeste))
     
   }
@@ -684,7 +686,6 @@ clean_esus <- function(dados){
     dados = dados %>% dplyr::mutate(
       classificacaoFinal = dplyr::case_when(
         resultadoTeste == "1" ~ "2",
-        
         resultadoTesteSorologicoIgA == "1" ~ "2",
         resultadoTesteSorologicoIgG == "1" ~ "2",
         resultadoTesteSorologicoIgM == "1" ~ "2",
@@ -705,6 +706,18 @@ clean_esus <- function(dados){
   # SEMANA EPIDEMIOLOGICA (3)
   
   dados$semEpiSintomas <- lubridate::epiweek(dados$dataInicioSintomas)
+  
+  
+  # REGIAO (3)
+  
+  dados$regiao <- stringr::str_sub(dados$estado, end = 1)
+  
+  
+  # FAIXA-ETARIA (3)
+  
+  dados$faixaEtaria = factor(1 + findInterval(dados$idade, c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100)),
+                             labels = c("00-04","05-09","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+"))
+  
   
   
   # PURGE LEVELS
