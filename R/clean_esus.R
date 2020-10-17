@@ -565,6 +565,7 @@ clean_esus <- function(dados){
     dados$tipoTeste[dados$tipoTeste == "RT PCR"] <- "1"
     dados$tipoTeste[dados$tipoTeste == "TESTE RAPIDO ANTICORPO"] <- "2"
     dados$tipoTeste[dados$tipoTeste == "TESTE RAPIDO ANTIGENO"] <- "3"
+    dados$tipoTeste[dados$tipoTeste == "TESTE SOROLOGICO"] <- "4"
     dados$tipoTeste[dados$tipoTeste == "ENZIMAIMUNOENSAIO ELISA IGM"] <- "4"
     dados$tipoTeste[dados$tipoTeste == "ENZIMAIMUNOENSAIO ELISA"] <- "4"
     dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA IGG"] <- "4"
@@ -694,8 +695,6 @@ clean_esus <- function(dados){
         resultadoTeste != "1" & classificacaoFinal == "2" ~ "3",
         
         TRUE ~ classificacaoFinal))
-    
-    
     
   }
   
