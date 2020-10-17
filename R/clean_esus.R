@@ -92,7 +92,7 @@ clean_esus <- function(dados){
   }
   
   
-  # DATA DE INICIO DOS SINTOMAS
+  # DATA DO INICIO DOS SINTOMAS
   
   if("dataInicioSintomas" %in% nomesVars){
     
@@ -211,18 +211,6 @@ clean_esus <- function(dados){
     dados$racaCor[dados$racaCor == "AMARELA"] <- "4"
     dados$racaCor[dados$racaCor == "INDIGENA"] <- "5"
     dados$racaCor[dados$racaCor == "IGNORADO"] <- "9"
-    
-  }
-  
-  
-  # IDADE
-  
-  if("idade" %in% nomesVars){
-    
-    dados$idade <- NA
-    dados$idade <- lubridate::time_length(lubridate::interval(dados$dataNascimento, dados$dataInicioSintomas), unit = "year")
-    dados$idade <- as.integer(dados$idade)
-    dados$idade[dados$idade == 0] <- NA
     
   }
   
@@ -711,12 +699,23 @@ clean_esus <- function(dados){
   
   dados$regiao <- stringr::str_sub(dados$estado, end = 1)
   
+
+  # IDADE (3)
+  
+  if("idade" %in% nomesVars){
+    
+    dados$idade <- NA
+    dados$idade <- lubridate::time_length(lubridate::interval(dados$dataNascimento, dados$dataInicioSintomas), unit = "year")
+    dados$idade <- as.integer(dados$idade)
+    dados$idade[dados$idade == 0] <- NA
+    
+  }
+
   
   # FAIXA-ETARIA (3)
   
   dados$faixaEtaria = factor(1 + findInterval(dados$idade, c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100)),
                              labels = c("00-04","05-09","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+"))
-  
   
   
   # PURGE LEVELS
@@ -730,3 +729,4 @@ clean_esus <- function(dados){
   
   
 }
+
