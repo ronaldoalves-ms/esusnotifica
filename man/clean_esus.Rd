@@ -25,7 +25,7 @@ A função retorna um data frame com dados tratados do e-SUS Notifica.
 %% ~put references to the literature/web site here ~
 Este é um projeto em desenvolvimento.
 
-Informações adiconais estão disponíveis em \url{https://osf.io/quvsf/}
+Informações adiconais estão disponíveis em \url{https://datasus.saude.gov.br/notifica/}
 }
 \author{
 %%  ~~who you are~~
@@ -44,6 +44,7 @@ Coordenação Geral de Informações e Análises Epidemiológicas, Departamento 
 }
 
 \examples{
+library(esusnotifica)
 dados_esus <- clean_esus(dados_esus)
 
 }
