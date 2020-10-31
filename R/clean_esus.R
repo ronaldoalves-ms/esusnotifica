@@ -7,6 +7,7 @@
 #' @return A funcao retorna um data frame com dados tratados do e-SUS Notifica.
 #'
 #' @examples
+#' library(esusnotifica)
 #' dados_esus <- clean_esus(dados_esus)
 #'
 #' @export
@@ -38,12 +39,13 @@ clean_esus <- function(dados){
     
     dados$nomeCompleto <- as.character(dados$nomeCompleto)
     
-    dados$nomeCompleto[dados$nomeCompleto == ""] <- NA
     dados$nomeCompleto <- abjutils::rm_accent(dados$nomeCompleto)
     dados$nomeCompleto <- stringr::str_replace_all(dados$nomeCompleto, "[^[:alpha:]]", " ")
     dados$nomeCompleto <- stringr::str_to_upper(dados$nomeCompleto)
     dados$nomeCompleto <- stringr::str_trim(dados$nomeCompleto, side = "both")
     dados$nomeCompleto <- stringr::str_squish(dados$nomeCompleto)
+    
+    dados$nomeCompleto[dados$nomeCompleto == ""] <- NA
     
   }
   
@@ -54,12 +56,13 @@ clean_esus <- function(dados){
     
     dados$nomeMae <- as.character(dados$nomeMae)
     
-    dados$nomeMae[dados$nomeMae == ""] <- NA
     dados$nomeMae <- abjutils::rm_accent(dados$nomeMae)
     dados$nomeMae <- stringr::str_replace_all(dados$nomeMae, "[^[:alpha:]]", " ")
     dados$nomeMae <- stringr::str_to_upper(dados$nomeMae)
     dados$nomeMae <- stringr::str_trim(dados$nomeMae, side = "both")
     dados$nomeMae <- stringr::str_squish(dados$nomeMae)
+    
+    dados$nomeMae[dados$nomeMae == ""] <- NA
     
   }
   
@@ -70,12 +73,13 @@ clean_esus <- function(dados){
     
     dados$logradouro <- as.character(dados$logradouro)
     
-    dados$logradouro[dados$logradouro == ""] <- NA
     dados$logradouro <- abjutils::rm_accent(dados$logradouro)
     dados$logradouro <- stringr::str_replace_all(dados$logradouro, "[^[:alpha:]]", " ")
     dados$logradouro <- stringr::str_to_upper(dados$logradouro)
     dados$logradouro <- stringr::str_trim(dados$logradouro, side = "both")
     dados$logradouro <- stringr::str_squish(dados$logradouro)
+    
+    dados$logradouro[dados$logradouro == ""] <- NA
     
   }
   
@@ -116,7 +120,7 @@ clean_esus <- function(dados){
   }
   
   
-  # DATA DO TESTE
+  # DATA DO TESTE (PCR/TESTE RAPIDO)
   
   if("dataTeste" %in% nomesVars){
     
@@ -184,14 +188,16 @@ clean_esus <- function(dados){
   
   if("sexo" %in% nomesVars){
     
+    dados$sexo <- as.character(dados$sexo)
+    
     dados$sexo <- abjutils::rm_accent(dados$sexo)
     dados$sexo <- stringr::str_remove_all(dados$sexo, "[^[:alpha:]]")
     dados$sexo <- stringr::str_to_upper(dados$sexo)
     
-    dados$sexo[dados$sexo == ""] <- NA
-    dados$sexo[dados$sexo == "INDEFINIDO"] <- NA
     dados$sexo[dados$sexo == "MASCULINO"] <- "1"
     dados$sexo[dados$sexo == "FEMININO"] <- "2"
+    dados$sexo[dados$sexo == "INDEFINIDO"] <- NA
+    dados$sexo[dados$sexo == ""] <- NA
     
   }
   
@@ -200,17 +206,35 @@ clean_esus <- function(dados){
   
   if("racaCor" %in% nomesVars){
     
+    dados$racaCor <- as.character(dados$racaCor)
+    
     dados$racaCor <- abjutils::rm_accent(dados$racaCor)
     dados$racaCor <- stringr::str_remove_all(dados$racaCor, "[^[:alpha:]]")
     dados$racaCor <- stringr::str_to_upper(dados$racaCor)
     
-    dados$racaCor[dados$racaCor == ""] <- NA
     dados$racaCor[dados$racaCor == "BRANCA"] <- "1"
     dados$racaCor[dados$racaCor == "PARDA"] <- "2"
     dados$racaCor[dados$racaCor == "PRETA"] <- "3"
     dados$racaCor[dados$racaCor == "AMARELA"] <- "4"
     dados$racaCor[dados$racaCor == "INDIGENA"] <- "5"
     dados$racaCor[dados$racaCor == "IGNORADO"] <- "9"
+    dados$racaCor[dados$racaCor == ""] <- NA
+    
+  }
+  
+  
+  # ETNIA
+  
+  if("etnia" %in% nomesVars){
+    
+    dados$etnia <- as.character(dados$etnia)
+    
+    dados$etnia <- abjutils::rm_accent(dados$etnia)
+    dados$etnia <- stringr::str_to_upper(dados$etnia)
+    dados$etnia <- stringr::str_trim(dados$etnia, side = "both")
+    dados$etnia <- stringr::str_squish(dados$etnia)
+    
+    dados$etnia[dados$etnia == ""] <- NA
     
   }
   
@@ -219,13 +243,15 @@ clean_esus <- function(dados){
   
   if("profissionalSaude" %in% nomesVars){
     
+    dados$profissionalSaude <- as.character(dados$profissionalSaude)
+    
     dados$profissionalSaude <- abjutils::rm_accent(dados$profissionalSaude)
     dados$profissionalSaude <- stringr::str_remove_all(dados$profissionalSaude, "[^[:alpha:]]")
     dados$profissionalSaude <- stringr::str_to_upper(dados$profissionalSaude)
     
-    dados$profissionalSaude[dados$profissionalSaude == ""] <- NA
     dados$profissionalSaude[dados$profissionalSaude == "SIM"] <- "1"
     dados$profissionalSaude[dados$profissionalSaude == "NAO"] <- "0"
+    dados$profissionalSaude[dados$profissionalSaude == ""] <- NA
     
   }
   
@@ -234,13 +260,15 @@ clean_esus <- function(dados){
   
   if("profissionalSeguranca" %in% nomesVars){
     
+    dados$profissionalSeguranca <- as.character(dados$profissionalSeguranca)
+    
     dados$profissionalSeguranca <- abjutils::rm_accent(dados$profissionalSeguranca)
     dados$profissionalSeguranca <- stringr::str_remove_all(dados$profissionalSeguranca, "[^[:alpha:]]")
     dados$profissionalSeguranca <- stringr::str_to_upper(dados$profissionalSeguranca)
     
-    dados$profissionalSeguranca[dados$profissionalSeguranca == ""] <- NA
     dados$profissionalSeguranca[dados$profissionalSeguranca == "SIM"] <- "1"
     dados$profissionalSeguranca[dados$profissionalSeguranca == "NAO"] <- "0"
+    dados$profissionalSeguranca[dados$profissionalSeguranca == ""] <- NA
     
   }
   
@@ -249,13 +277,15 @@ clean_esus <- function(dados){
   
   if("estrangeiro" %in% nomesVars){
     
+    dados$estrangeiro <- as.character(dados$estrangeiro)
+    
     dados$estrangeiro <- abjutils::rm_accent(dados$estrangeiro)
     dados$estrangeiro <- stringr::str_remove_all(dados$estrangeiro, "[^[:alpha:]]")
     dados$estrangeiro <- stringr::str_to_upper(dados$estrangeiro)
     
-    dados$estrangeiro[dados$estrangeiro == ""] <- NA
     dados$estrangeiro[dados$estrangeiro == "SIM"] <- "1"
     dados$estrangeiro[dados$estrangeiro == "NAO"] <- "0"
+    dados$estrangeiro[dados$estrangeiro == ""] <- NA
     
   }
   
@@ -272,7 +302,6 @@ clean_esus <- function(dados){
     dados$estado <- stringr::str_trim(dados$estado, side = "both")
     dados$estado <- stringr::str_squish(dados$estado)
     
-    dados$estado[dados$estado == ""] <- NA
     dados$estado[dados$estado == "ACRE"] <- "12"
     dados$estado[dados$estado == "ALAGOAS"] <- "27"
     dados$estado[dados$estado == "AMAPA"] <- "16"
@@ -301,6 +330,8 @@ clean_esus <- function(dados){
     dados$estado[dados$estado == "SERGIPE"] <- "28"
     dados$estado[dados$estado == "TOCANTINS"] <- "17"
     
+    dados$estado[dados$estado == ""] <- NA
+    
   }
   
   
@@ -316,7 +347,6 @@ clean_esus <- function(dados){
     dados$estadoNotificacao <- stringr::str_trim(dados$estadoNotificacao, side = "both")
     dados$estadoNotificacao <- stringr::str_squish(dados$estadoNotificacao)
     
-    dados$estadoNotificacao[dados$estadoNotificacao == ""] <- NA
     dados$estadoNotificacao[dados$estadoNotificacao == "ACRE"] <- "12"
     dados$estadoNotificacao[dados$estadoNotificacao == "ALAGOAS"] <- "27"
     dados$estadoNotificacao[dados$estadoNotificacao == "AMAPA"] <- "16"
@@ -344,6 +374,8 @@ clean_esus <- function(dados){
     dados$estadoNotificacao[dados$estadoNotificacao == "SAO PAULO"] <- "35"
     dados$estadoNotificacao[dados$estadoNotificacao == "SERGIPE"] <- "28"
     dados$estadoNotificacao[dados$estadoNotificacao == "TOCANTINS"] <- "17"
+    
+    dados$estadoNotificacao[dados$estadoNotificacao == ""] <- NA
     
   }
   
@@ -416,7 +448,7 @@ clean_esus <- function(dados){
   }
   
    
-  # RESULTADO DO TESTE
+  # RESULTADO DO TESTE (PCR/TESTE RAPIDO)
   
   if("resultadoTeste" %in% nomesVars){
     
@@ -428,10 +460,10 @@ clean_esus <- function(dados){
     dados$resultadoTeste <- stringr::str_trim(dados$resultadoTeste, side = "both")
     dados$resultadoTeste <- stringr::str_squish(dados$resultadoTeste)
     
-    dados$resultadoTeste[dados$resultadoTeste == ""] <- NA
     dados$resultadoTeste[dados$resultadoTeste == "POSITIVO"] <- "1"
     dados$resultadoTeste[dados$resultadoTeste == "NEGATIVO"] <- "2"
     dados$resultadoTeste[dados$resultadoTeste == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTeste[dados$resultadoTeste == ""] <- NA
     
   }
   
@@ -448,10 +480,10 @@ clean_esus <- function(dados){
     dados$resultadoTesteSorologicoIgA <- stringr::str_trim(dados$resultadoTesteSorologicoIgA, side = "both")
     dados$resultadoTesteSorologicoIgA <- stringr::str_squish(dados$resultadoTesteSorologicoIgA)
     
-    dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == ""] <- NA
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "NAO REAGENTE"] <- "2"
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == ""] <- NA
     
   }
   
@@ -468,10 +500,10 @@ clean_esus <- function(dados){
     dados$resultadoTesteSorologicoIgG <- stringr::str_trim(dados$resultadoTesteSorologicoIgG, side = "both")
     dados$resultadoTesteSorologicoIgG <- stringr::str_squish(dados$resultadoTesteSorologicoIgG)
     
-    dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == ""] <- NA
     dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "NAO REAGENTE"] <- "2"
     dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == ""] <- NA
     
   }
   
@@ -488,15 +520,15 @@ clean_esus <- function(dados){
     dados$resultadoTesteSorologicoIgM <- stringr::str_trim(dados$resultadoTesteSorologicoIgM, side = "both")
     dados$resultadoTesteSorologicoIgM <- stringr::str_squish(dados$resultadoTesteSorologicoIgM)
     
-    dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == ""] <- NA
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "NAO REAGENTE"] <- "2"
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == ""] <- NA
     
   }
   
   
-  # RESULTADO DO TESTE SOROLOGICO TOTAIS
+  # RESULTADO DO TESTE SOROLOGICO ANTICORPOS TOTAIS
   
   if("resultadoTesteSorologicoTotais" %in% nomesVars){
     
@@ -508,15 +540,15 @@ clean_esus <- function(dados){
     dados$resultadoTesteSorologicoTotais <- stringr::str_trim(dados$resultadoTesteSorologicoTotais, side = "both")
     dados$resultadoTesteSorologicoTotais <- stringr::str_squish(dados$resultadoTesteSorologicoTotais)
     
-    dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == ""] <- NA
     dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "NAO REAGENTE"] <- "2"
     dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == ""] <- NA
     
   }
   
   
-  # ESTADO DO TESTE
+  # ESTADO DO TESTE (PCR/TESTE RAPIDO)
   
   if("estadoTeste" %in% nomesVars){
     
@@ -532,7 +564,6 @@ clean_esus <- function(dados){
     dados$estadoTeste[dados$estadoTeste == "COLETADO"] <- "2"
     dados$estadoTeste[dados$estadoTeste == "CONCLUIDO"] <- "3"
     dados$estadoTeste[dados$estadoTeste == "EXAME NAO SOLICITADO"] <- "4"
-    
     dados$estadoTeste[dados$estadoTeste == ""] <- NA
     
   }
@@ -559,7 +590,6 @@ clean_esus <- function(dados){
     dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA IGG"] <- "4"
     dados$tipoTeste[dados$tipoTeste == "IMUNOENSAIO POR ELETROQUIMIOLUMINESCENCIA ECLIA"] <- "4"
     dados$tipoTeste[dados$tipoTeste == "QUIMIOLUMINESCENCIA CLIA"] <- "4"
-    
     dados$tipoTeste[dados$tipoTeste == ""] <- NA
     
   }
@@ -577,19 +607,19 @@ clean_esus <- function(dados){
     dados$classificacaoFinal <- stringr::str_trim(dados$classificacaoFinal, side = "both")
     dados$classificacaoFinal <- stringr::str_squish(dados$classificacaoFinal)
     
-    dados$classificacaoFinal[dados$classificacaoFinal == ""] <- NA
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO LABORATORIAL"] <- "1"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO LABORATORIAL"] <- "1"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO EPIDEMIOLOGICO"] <- "2"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO EPIDEMIOLOGICO"] <- "2"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO IMAGEM"] <- "3"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO IMAGEM"] <- "3"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO"] <- "4"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO"] <- "4"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO POR CRITERIO CLINICO"] <- "4"
+    dados$classificacaoFinal[dados$classificacaoFinal == "SINDROME GRIPAL NAO ESPECIFICADA"] <- "5"
+    dados$classificacaoFinal[dados$classificacaoFinal == "DESCARTADO"] <- "6"
     
-    dados$classificacaoFinal[dados$classificacaoFinal == "DESCARTADO"] <- "1"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO LABORATORIAL"] <- "2"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO LABORATORIAL"] <- "2"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO EPIDEMIOLOGICO"] <- "3"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO EPIDEMIOLOGICO"] <- "3"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO IMAGEM"] <- "4"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO IMAGEM"] <- "4"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO"] <- "5"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO"] <- "5"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO POR CRITERIO CLINICO"] <- "5"
-    dados$classificacaoFinal[dados$classificacaoFinal == "SINDROME GRIPAL NAO ESPECIFICADA"] <- "6"
+    dados$classificacaoFinal[dados$classificacaoFinal == ""] <- NA
     
   }
   
@@ -612,7 +642,7 @@ clean_esus <- function(dados){
     dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO"] <- "4"
     dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO EM UTI"] <- "5"
     dados$evolucaoCaso[dados$evolucaoCaso == "IGNORADO"] <- "6"
-    dados$evolucaoCaso[dados$evolucaoCaso == "CANCELADO"] <- "7"
+    dados$evolucaoCaso[dados$evolucaoCaso == "CANCELADO"] <- "9"
     
     dados$evolucaoCaso[dados$evolucaoCaso == ""] <- NA
     
@@ -674,13 +704,17 @@ clean_esus <- function(dados){
     
     dados = dados %>% dplyr::mutate(
       classificacaoFinal = dplyr::case_when(
-        resultadoTeste == "1" ~ "2",
-        resultadoTesteSorologicoIgA == "1" ~ "2",
-        resultadoTesteSorologicoIgG == "1" ~ "2",
-        resultadoTesteSorologicoIgM == "1" ~ "2",
-        resultadoTesteSorologicoTotais == "1" ~ "2",
+        resultadoTeste == "1" ~ "1",
+        resultadoTesteSorologicoIgA == "1" ~ "1",
+        resultadoTesteSorologicoIgG == "1" ~ "1",
+        resultadoTesteSorologicoIgM == "1" ~ "1",
+        resultadoTesteSorologicoTotais == "1" ~ "1",
         
-        resultadoTeste != "1" & classificacaoFinal == "2" ~ "3",
+        resultadoTeste != "1" & 
+          resultadoTesteSorologicoIgA != "1" & 
+          resultadoTesteSorologicoIgG != "1" & 
+          resultadoTesteSorologicoIgM != "1" & 
+          resultadoTesteSorologicoTotais != "1" & classificacaoFinal == "1" ~ "2",
         
         TRUE ~ classificacaoFinal))
     
@@ -720,6 +754,11 @@ clean_esus <- function(dados){
   dados = dados %>% mutate(faixaEtaria = case_when(idade < 5 ~ "1", idade >= 5 & idade < 10 ~ "2", idade >= 10 & idade < 15 ~ "3", idade >= 15 & idade < 20 ~ "4", idade >= 20 & idade < 25 ~ "5", idade >= 25 & idade < 30 ~ "6", idade >= 30 & idade < 35 ~ "7", idade >= 35 & idade < 40 ~ "8", idade >= 40 & idade < 45 ~ "9", idade >= 45 & idade < 50 ~ "10", idade >= 50 & idade < 55 ~ "11", idade >= 55 & idade < 60 ~ "12", idade >= 60 & idade < 65 ~ "13", idade >= 65 & idade < 70 ~ "14", idade >= 70 & idade < 75 ~ "15", idade >= 75 & idade < 80 ~ "16", idade >= 80 & idade < 85 ~ "17", idade >= 85 & idade < 90 ~ "18", idade >= 90 & idade < 95 ~ "19", idade >= 95 & idade < 100 ~ "20", idade >= 100 ~ "21", TRUE ~ NA_character_))
   
 
+  # FLAG TESTADOS (3)
+  
+  #
+  
+  
   # PURGE LEVELS
   
   dados <- droplevels(dados)
