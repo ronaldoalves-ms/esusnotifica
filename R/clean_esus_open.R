@@ -32,18 +32,6 @@ clean_esus_open <- function(dados){
   nomesVars <- names(dados)
   
   
-  # DATA DE NASCIMENTO
-  
-  if("dataNascimento" %in% nomesVars){
-    
-    dados$dataNascimento <- lubridate::as_date(dados$dataNascimento)
-    
-    dados$dataNascimento[dados$dataNascimento < lubridate::as_date("1901-01-01")] <- NA
-    dados$dataNascimento[dados$dataNascimento > Sys.Date()] <- NA
-    
-  }
-  
-  
   # DATA DO INICIO DOS SINTOMAS
   
   if("dataInicioSintomas" %in% nomesVars){
@@ -127,87 +115,11 @@ clean_esus_open <- function(dados){
   }
 
 
-  # COMUNIDADE TRADICIONAL (I)
-  
-  if("contemComunidadeTradicional" %in% nomesVars){
-  
-    dados$contemComunidadeTradicional <- as.character(dados$contemComunidadeTradicional)
-    
-    dados$contemComunidadeTradicional <- abjutils::rm_accent(dados$contemComunidadeTradicional)
-    dados$contemComunidadeTradicional <- stringr::str_remove_all(dados$contemComunidadeTradicional, "[^[:alpha:]]")
-    dados$contemComunidadeTradicional <- stringr::str_to_upper(dados$contemComunidadeTradicional)
-    
-    dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "SIM"] <- "1"
-    dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "NAO"] <- "0"
-    dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == ""] <- NA
-  
-  }
-  
-  
-  # COMUNIDADE TRADICIONAL (II)
-  
-  if("comunidadeTradicional" %in% nomesVars){
-  
-    dados$comunidadeTradicional <- as.character(dados$comunidadeTradicional)
-    
-    dados$comunidadeTradicional <- abjutils::rm_accent(dados$comunidadeTradicional)
-    dados$comunidadeTradicional <- stringr::str_to_upper(dados$comunidadeTradicional)
-    dados$comunidadeTradicional <- stringr::str_trim(dados$comunidadeTradicional, side = "both")
-    dados$comunidadeTradicional <- stringr::str_squish(dados$comunidadeTradicional)
-    
-    dados$comunidadeTradicional[dados$comunidadeTradicional == "ACAMPADA"] <- "1"
-    dados$comunidadeTradicional[dados$comunidadeTradicional == "AGROEXTRATIVISTAS"] <- "2"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "ANDIROBEIRAS"] <- "3"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "APATRIDAS"] <- "4"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "ASSENTADA"] <- "5"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAATINGUEIROS"] <- "6"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAICARAS"] <- "7"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAMPONESES"] <- "8"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CASTANHEIRAS"] <- "9"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CATADORES DE MANGABA"] <- "10"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CERRADO"] <- "11"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CIGANOS"] <- "12"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "COMUNIDADES DE FUNDO E FECHO DE PASTO"] <- "13"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "EXTRATIVISTAS"] <- "14"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "FAXINALENSES"] <- "15"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "GERAIZEIROS"] <- "16"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "ISQUEIROS"] <- "17"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "JANGADEIROS"] <- "18"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "MARISQUEIROS"] <- "19"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "MIGRANTES"] <- "20"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "MORROQUIANOS"] <- "21"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "PANTANEIROS"] <- "22"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAIS"] <- "23"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POMERANOS"] <- "24"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACAO CIRCENSE"] <- "25"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACOES ATINGIDAS POR BARRAGENS"] <- "26"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS DE TERREIRO / MATRIZ AFRICANA"] <- "27"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS INDIGENAS"] <- "28"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS QUILOMBOLAS"] <- "29"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "QUEBRADEIRAS DE COCO BABACU"] <- "30"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "REFUGIADOS"] <- "31"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "RETIREIROS"] <- "32"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "RIBEIRINHOS"] <- "33"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "SERINGUEIROS"] <- "34"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS ASSALARIADOS"] <- "35"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS TEMPORARIOS"] <- "36"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "VARJEIROS"] <- "37"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "VAZANTEIROS"] <- "38"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "OUTROS"] <- "99"
-		
-    dados$comunidadeTradicional[dados$comunidadeTradicional == ""] <- NA
-  
-  }
-  
-    
   # IDADE
   
   if("idade" %in% nomesVars){
     
-    dados$idade <- NA
-    dados$idade <- lubridate::time_length(lubridate::interval(dados$dataNascimento, dados$dataInicioSintomas), unit = "year")
     dados$idade <- as.integer(dados$idade)
-    dados$idade[dados$idade == 0] <- NA
     
   }
   
@@ -688,6 +600,13 @@ clean_esus_open <- function(dados){
   }
   
   
+  # DATA DO INICIO DOS SINTOMAS (2)
+  
+  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTeste
+  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTesteSorologico
+  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataNotificacao
+  
+  
   ## PARTE 3
   
   
@@ -701,22 +620,7 @@ clean_esus_open <- function(dados){
   dados$regiao <- stringr::str_sub(dados$estado, end = 1)
   
 
-  # IDADE (3)
-  
-  if("idade" %in% nomesVars){
-    
-    dados$idade <- NA
-    dados$idade <- lubridate::time_length(lubridate::interval(dados$dataNascimento, dados$dataInicioSintomas), unit = "year")
-    dados$idade <- as.integer(dados$idade)
-    dados$idade[dados$idade == 0] <- NA
-    
-  }
-
-  
   # FAIXA-ETARIA (3)
-  
-  #dados$faixaEtaria = factor(1 + findInterval(dados$idade, c(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100)),
-  #                           labels = c("00-04","05-09","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+"))
   
   dados = dados %>% mutate(faixaEtaria = case_when(idade < 5 ~ "1", idade >= 5 & idade < 10 ~ "2", idade >= 10 & idade < 15 ~ "3", idade >= 15 & idade < 20 ~ "4", idade >= 20 & idade < 25 ~ "5", idade >= 25 & idade < 30 ~ "6", idade >= 30 & idade < 35 ~ "7", idade >= 35 & idade < 40 ~ "8", idade >= 40 & idade < 45 ~ "9", idade >= 45 & idade < 50 ~ "10", idade >= 50 & idade < 55 ~ "11", idade >= 55 & idade < 60 ~ "12", idade >= 60 & idade < 65 ~ "13", idade >= 65 & idade < 70 ~ "14", idade >= 70 & idade < 75 ~ "15", idade >= 75 & idade < 80 ~ "16", idade >= 80 & idade < 85 ~ "17", idade >= 85 & idade < 90 ~ "18", idade >= 90 & idade < 95 ~ "19", idade >= 95 & idade < 100 ~ "20", idade >= 100 ~ "21", TRUE ~ NA_character_))
   
