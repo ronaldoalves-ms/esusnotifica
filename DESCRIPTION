@@ -1,7 +1,7 @@
 Package: esusnotifica
 Type: Package
 Title: Curadoria dos Dados do e-SUS Notifica
-Version: 0.0.3
+Version: 0.0.4
 Author: Ronaldo Fernandes Santos Alves <ronaldo.alves@saude.gov.br>
 Maintainer: Ronaldo Fernandes Santos Alves <ronaldo.alves@saude.gov.br>
 Description: Pacote em desenvolvimento.
