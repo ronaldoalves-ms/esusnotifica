@@ -236,13 +236,13 @@ clean_esus <- function(dados){
     
     dados$etnia[dados$etnia == ""] <- NA
     
-  }
+    }
   
   
   # COMUNIDADE TRADICIONAL (I)
   
   if("contemComunidadeTradicional" %in% nomesVars){
-  
+    
     dados$contemComunidadeTradicional <- as.character(dados$contemComunidadeTradicional)
     
     dados$contemComunidadeTradicional <- abjutils::rm_accent(dados$contemComunidadeTradicional)
@@ -252,8 +252,8 @@ clean_esus <- function(dados){
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "SIM"] <- "1"
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "NAO"] <- "0"
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == ""] <- NA
-  
-  }
+    
+    }
   
   
   # COMUNIDADE TRADICIONAL (II)
@@ -269,47 +269,47 @@ clean_esus <- function(dados){
     
     dados$comunidadeTradicional[dados$comunidadeTradicional == "ACAMPADA"] <- "1"
     dados$comunidadeTradicional[dados$comunidadeTradicional == "AGROEXTRATIVISTAS"] <- "2"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "ANDIROBEIRAS"] <- "3"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "APATRIDAS"] <- "4"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "ASSENTADA"] <- "5"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAATINGUEIROS"] <- "6"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAICARAS"] <- "7"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAMPONESES"] <- "8"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CASTANHEIRAS"] <- "9"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CATADORES DE MANGABA"] <- "10"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CERRADO"] <- "11"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "CIGANOS"] <- "12"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "COMUNIDADES DE FUNDO E FECHO DE PASTO"] <- "13"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "EXTRATIVISTAS"] <- "14"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "FAXINALENSES"] <- "15"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "GERAIZEIROS"] <- "16"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "ISQUEIROS"] <- "17"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "JANGADEIROS"] <- "18"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "MARISQUEIROS"] <- "19"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "MIGRANTES"] <- "20"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "MORROQUIANOS"] <- "21"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "PANTANEIROS"] <- "22"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAIS"] <- "23"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POMERANOS"] <- "24"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACAO CIRCENSE"] <- "25"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACOES ATINGIDAS POR BARRAGENS"] <- "26"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS DE TERREIRO / MATRIZ AFRICANA"] <- "27"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS INDIGENAS"] <- "28"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS QUILOMBOLAS"] <- "29"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "QUEBRADEIRAS DE COCO BABACU"] <- "30"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "REFUGIADOS"] <- "31"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "RETIREIROS"] <- "32"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "RIBEIRINHOS"] <- "33"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "SERINGUEIROS"] <- "34"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS ASSALARIADOS"] <- "35"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS TEMPORARIOS"] <- "36"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "VARJEIROS"] <- "37"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "VAZANTEIROS"] <- "38"
-	dados$comunidadeTradicional[dados$comunidadeTradicional == "OUTROS"] <- "99"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "ANDIROBEIRAS"] <- "3"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "APATRIDAS"] <- "4"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ASSENTADA"] <- "5"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CAATINGUEIROS"] <- "6"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CAICARAS"] <- "7"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAMPONESES"] <- "8"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CASTANHEIRAS"] <- "9"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CATADORES DE MANGABA"] <- "10"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CERRADO"] <- "11"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CIGANOS"] <- "12"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "COMUNIDADES DE FUNDO E FECHO DE PASTO"] <- "13"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "EXTRATIVISTAS"] <- "14"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "FAXINALENSES"] <- "15"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "GERAIZEIROS"] <- "16"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ISQUEIROS"] <- "17"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "JANGADEIROS"] <- "18"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MARISQUEIROS"] <- "19"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MIGRANTES"] <- "20"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MORROQUIANOS"] <- "21"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "PANTANEIROS"] <- "22"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAIS"] <- "23"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POMERANOS"] <- "24"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACAO CIRCENSE"] <- "25"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACOES ATINGIDAS POR BARRAGENS"] <- "26"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS DE TERREIRO / MATRIZ AFRICANA"] <- "27"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS INDIGENAS"] <- "28"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS QUILOMBOLAS"] <- "29"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "QUEBRADEIRAS DE COCO BABACU"] <- "30"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "REFUGIADOS"] <- "31"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "RETIREIROS"] <- "32"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "RIBEIRINHOS"] <- "33"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "SERINGUEIROS"] <- "34"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS ASSALARIADOS"] <- "35"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS TEMPORARIOS"] <- "36"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "VARJEIROS"] <- "37"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "VAZANTEIROS"] <- "38"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "OUTROS"] <- "99"
 		
     dados$comunidadeTradicional[dados$comunidadeTradicional == ""] <- NA
-  
-  }
+    
+    }
   
   
   # PROFISSIONAL DA SAUDE
@@ -792,6 +792,14 @@ clean_esus <- function(dados){
         TRUE ~ classificacaoFinal))
     
   }
+  
+  
+  # DATA DO INICIO DOS SINTOMAS (2)
+  
+  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTeste
+  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTesteSorologico
+  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataNotificacao
+  
   
   
   ## PARTE 3
