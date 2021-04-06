@@ -796,9 +796,10 @@ clean_esus <- function(dados){
   
   # DATA DO INICIO DOS SINTOMAS (2)
   
-  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTeste
-  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTesteSorologico
-  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataNotificacao
+  dados <- dados %>% 
+  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTeste, dataInicioSintomas)) %>% 
+  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTesteSorologico, dataInicioSintomas)) %>% 
+  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas))
   
   
   
