@@ -68,6 +68,18 @@ clean_esus_open <- function(dados){
   }
   
   
+  # DATA DO TESTE SOROLOGICO
+  
+  if("dataTesteSorologico" %in% nomesVars){
+    
+    dados$dataTesteSorologico <- lubridate::as_date(dados$dataTesteSorologico)
+    
+    dados$dataTesteSorologico[dados$dataTesteSorologico < lubridate::as_date("2020-01-01")] <- NA
+    dados$dataTesteSorologico[dados$dataTesteSorologico > Sys.Date()] <- NA
+    
+  }
+  
+  
   # DATA DE ENCERRAMENTO
   
   if("dataEncerramento" %in% nomesVars){
@@ -602,9 +614,15 @@ clean_esus_open <- function(dados){
   
   # DATA DO INICIO DOS SINTOMAS (2)
   
-  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTeste
-  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTesteSorologico
-  dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataNotificacao
+  #dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTeste
+  #dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataTesteSorologico
+  #dados$dataInicioSintomas[is.na(dados$dataInicioSintomas)] <- dados$dataNotificacao
+  
+  dados <- dados %>% 
+    mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTeste, dataInicioSintomas)) %>% 
+    mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTesteSorologico, dataInicioSintomas)) %>% 
+    mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas))
+  
   
   
   ## PARTE 3
