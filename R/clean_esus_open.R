@@ -92,6 +92,30 @@ clean_esus_open <- function(dados){
   }
   
   
+  # DATA DA CRIACAO DO REGISTRO
+  
+  if("dataRegistro" %in% nomesVars){
+        
+    dados$dataRegistro <- lubridate::as_date(dados$dataRegistro)
+    
+    dados$dataRegistro[dados$dataRegistro < lubridate::as_date("2020-01-01")] <- NA
+    dados$dataRegistro[dados$dataRegistro > Sys.Date()] <- NA
+    
+  }
+  
+  
+  # DATA DA ATUALIZACAO DO REGISTRO
+  
+  if("dataAtualizacao" %in% nomesVars){
+    
+    dados$dataAtualizacao <- lubridate::as_date(dados$dataAtualizacao)
+    
+    dados$dataAtualizacao[dados$dataAtualizacao < lubridate::as_date("2020-01-01")] <- NA
+    dados$dataAtualizacao[dados$dataAtualizacao > Sys.Date()] <- NA
+    
+  }
+  
+    
   # SEXO
   
   if("sexo" %in% nomesVars){
@@ -621,15 +645,17 @@ clean_esus_open <- function(dados){
   dados <- dados %>% 
     mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTeste, dataInicioSintomas)) %>% 
     mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTesteSorologico, dataInicioSintomas)) %>% 
-    mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas))
+    mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas)) %>%
+	mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataRegistro, dataInicioSintomas))
   
   
   
   ## PARTE 3
   
   
-  # SEMANA EPIDEMIOLOGICA (3)
+  # ANO/SEMANA EPIDEMIOLOGICA (3)
   
+  dados$anoEpiSintomas <- lubridate::epiyear(dados$dataInicioSintomas)
   dados$semEpiSintomas <- lubridate::epiweek(dados$dataInicioSintomas)
   
   
