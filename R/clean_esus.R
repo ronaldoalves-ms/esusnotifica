@@ -799,15 +799,17 @@ clean_esus <- function(dados){
   dados <- dados %>% 
   mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTeste, dataInicioSintomas)) %>% 
   mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTesteSorologico, dataInicioSintomas)) %>% 
-  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas))
+  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas)) %>%
+  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataRegistro, dataInicioSintomas))
   
   
   
   ## PARTE 3
   
   
-  # SEMANA EPIDEMIOLOGICA (3)
+  # ANO/SEMANA EPIDEMIOLOGICA (3)
   
+  dados$anoEpiSintomas <- lubridate::epiyear(dados$dataInicioSintomas)
   dados$semEpiSintomas <- lubridate::epiweek(dados$dataInicioSintomas)
   
   
