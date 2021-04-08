@@ -160,12 +160,12 @@ clean_esus <- function(dados){
   
   if("_created_at" %in% nomesVars){
     
-    names(dados)[names(dados) == "_created_at"] <- "dataCriacao"
+    names(dados)[names(dados) == "_created_at"] <- "dataRegistro"
     
-    dados$dataCriacao <- lubridate::as_date(dados$dataCriacao)
+    dados$dataRegistro <- lubridate::as_date(dados$dataRegistro)
     
-    dados$dataCriacao[dados$dataCriacao < lubridate::as_date("2020-01-01")] <- NA
-    dados$dataCriacao[dados$dataCriacao > Sys.Date()] <- NA
+    dados$dataRegistro[dados$dataRegistro < lubridate::as_date("2020-01-01")] <- NA
+    dados$dataRegistro[dados$dataRegistro > Sys.Date()] <- NA
     
   }
   
