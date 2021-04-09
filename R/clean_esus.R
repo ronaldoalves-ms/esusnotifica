@@ -824,8 +824,8 @@ clean_esus <- function(dados){
     
     dados$idade <- NA
     dados$idade <- lubridate::time_length(lubridate::interval(dados$dataNascimento, dados$dataInicioSintomas), unit = "year")
-    dados$idade <- as.integer(dados$idade)
     dados$idade[dados$idade == 0] <- NA
+    dados$idade <- as.integer(dados$idade)
     
   }
 
