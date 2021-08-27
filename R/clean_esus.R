@@ -754,6 +754,38 @@ clean_esus <- function(dados){
     dados$condicoes[dados$condicoes == ""] <- NA
     
   }
+	
+ # TESTES
+	
+ if("testes" %in% nomesVars){
+    
+  testes <- data.frame( 
+  idCollection = esus$idCollection,
+  json = esus$testes,
+  stringsAsFactors = FALSE)
+	 
+  testes$json = gsub("\\[|\\]", '', testes$json)
+  testes$json = gsub("\\{|\\}", '', testes$json)
+  testes2 = str_split_fixed(testes$json, ",", 30) 
+  testes2 = gsub(".*:","", testes2)
+  testes2 = gsub("\\'", '', testes2)
+  testes = data.frame(cbind(testes$idCollection, testes2))
+
+  colnames(testes) = c('idCollection', 'tipoTeste1', 'codigoEstadoTeste1', 'estadoTeste1', 'codigoTipoTeste1', 
+                     'fabricanteTeste1', 'loteTeste1', 'resultadoTeste1', 'codigoResultadoTeste1', 'iso1', 
+                     'dataColetaTeste1', 'tipoTeste2', 'codigoEstadoTeste2', 'estadoTeste2', 'codigoTipoTeste2', 
+                     'fabricanteTeste2', 'loteTeste2', 'resultadoTeste2', 'codigoResultadoTeste2', 'iso2', 
+                     'dataColetaTeste2', 'tipoTeste3', 'codigoEstadoTeste3', 'estadoTeste3', 'codigoTipoTeste3', 
+                     'fabricanteTeste3', 'loteTeste3', 'resultadoTeste3','dataColetaTeste3', 'iso3', 
+                     'outrosTestes')
+	 
+  esus = esus %>% left_join(testes, by = "idCollection")
+  esus = esus %>% mutate(numeroTotalTestes = str_count(esus2$testes, "tipoTeste"))
+  esus = esus %>% mutate(resultadosPositivos = str_count(esus2$testes, "Detectável"))
+  esus$testes = NULL
+  rm(testes)
+	 
+  }
   
   
   ## PARTE 2
