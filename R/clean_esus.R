@@ -766,11 +766,11 @@ clean_esus <- function(dados){
 	 
   testes$json = gsub("\\[|\\]", '', testes$json)
   testes$json = gsub("\\{|\\}", '', testes$json)
-  testes2 = str_split_fixed(testes$json, ",", 30) 
+  testes2 = str_split_fixed(testes$json, ",", 31) ##são criadas 30 colunas para até 3 testes
+  testes3 = data.frame(str_split_fixed(testes$json, ",", 31))
   testes2 = gsub(".*:","", testes2)
   testes2 = gsub("\\'", '', testes2)
   testes = data.frame(cbind(testes$idCollection, testes2))
-
   colnames(testes) = c('idCollection', 'tipoTeste1', 'codigoEstadoTeste1', 'estadoTeste1', 'codigoTipoTeste1', 
                      'fabricanteTeste1', 'loteTeste1', 'resultadoTeste1', 'codigoResultadoTeste1', 'iso1', 
                      'dataColetaTeste1', 'tipoTeste2', 'codigoEstadoTeste2', 'estadoTeste2', 'codigoTipoTeste2', 
@@ -778,10 +778,12 @@ clean_esus <- function(dados){
                      'dataColetaTeste2', 'tipoTeste3', 'codigoEstadoTeste3', 'estadoTeste3', 'codigoTipoTeste3', 
                      'fabricanteTeste3', 'loteTeste3', 'resultadoTeste3','dataColetaTeste3', 'iso3', 
                      'outrosTestes')
-	 
+  testes$dataColetaTeste1 = as.Date(substring(testes3$X10, 10, 19), "%Y-%m-%d")
+  testes$dataColetaTeste2 = as.Date(substring(testes3$X20, 10, 19), "%Y-%m-%d")
+  testes$dataColetaTeste3 = as.Date(substring(testes3$X30, 10, 19), "%Y-%m-%d")
   esus = esus %>% left_join(testes, by = "idCollection")
-  esus = esus %>% mutate(numeroTotalTestes = str_count(esus2$testes, "tipoTeste"))
-  esus = esus %>% mutate(resultadosPositivos = str_count(esus2$testes, "Detectável"))
+  esus = esus %>% mutate(numeroTotalTestes = str_count(esus$testes, "tipoTeste"))
+  esus = esus %>% mutate(resultadosPositivos = str_count(esus$testes, "Detectável"))
   esus$testes = NULL
   rm(testes)
 	 
