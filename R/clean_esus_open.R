@@ -635,6 +635,12 @@ clean_esus_open <- function(dados){
     
   }
   
+  # CLASSIFICACAO FINAL (3)
+  # Verificando o resultado dos exames na variável testes 
+  # Caso encontre "'resultadoTeste': 'Reagente'" ou "'resultadoTeste': 'Detectável'" modifica a classificação final para "1" - "Confirmado laboratorial"
+  
+  dados$classificacaoFinal[dados$testes %like% "'resultadoTeste': 'Reagente'" | dados$testes %like% "'resultadoTeste': 'Detectável'"] <- "1"
+  
   
   # DATA DO INICIO DOS SINTOMAS (2)
   
@@ -646,7 +652,7 @@ clean_esus_open <- function(dados){
     mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTeste, dataInicioSintomas)) %>% 
     mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataTesteSorologico, dataInicioSintomas)) %>% 
     mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataNotificacao, dataInicioSintomas)) %>%
-	mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataRegistro, dataInicioSintomas))
+	  mutate(dataInicioSintomas = if_else(is.na(dataInicioSintomas), dataRegistro, dataInicioSintomas))
   
   
   
