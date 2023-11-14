@@ -21,6 +21,7 @@
 #usethis::use_package("lubridate", type = "Imports")
 #usethis::use_package("stringr", type = "Imports")
 #usethis::use_package("abjutils", type = "Imports")
+#usethis::use_package("data.table", type = "Imports")
 
 
 #usethis::use_pipe(export = TRUE)
@@ -31,6 +32,14 @@ clean_esus <- function(dados){
   
   
   nomesVars <- names(dados)
+  
+  # Validando o nome das variáveis para evitar carregamento com "X." ou "X_" por exemplo "X_update_at" vai ficar "update_at"
+
+  if (any(grepl("^X_",nomesVars))){
+    names(dados) <- gsub(nomesVars,pattern ="^X[_|.]", replacement = "", ignore.case = T)
+  } 
+
+
   
   
   # NOME COMPLETO
@@ -158,9 +167,9 @@ clean_esus <- function(dados){
   
   # DATA DA CRIACAO DO REGISTRO
   
-  if("_created_at" %in% nomesVars){
+  if(any(grepl("created_at",nomesVars))){
     
-    names(dados)[names(dados) == "_created_at"] <- "dataRegistro"
+    names(dados)[names(dados) == "created_at"] <- "dataRegistro"
     
     dados$dataRegistro <- lubridate::as_date(dados$dataRegistro)
     
@@ -172,9 +181,9 @@ clean_esus <- function(dados){
   
   # DATA DA ATUALIZACAO DO REGISTRO
   
-  if("_updated_at" %in% nomesVars){
+  if("updated_at" %in% nomesVars){
     
-    names(dados)[names(dados) == "_updated_at"] <- "dataAtualizacao"
+    names(dados)[names(dados) == "updated_at"] <- "dataAtualizacao"
     
     dados$dataAtualizacao <- lubridate::as_date(dados$dataAtualizacao)
     
@@ -213,11 +222,11 @@ clean_esus <- function(dados){
     dados$racaCor <- stringr::str_to_upper(dados$racaCor)
     
     dados$racaCor[dados$racaCor == "BRANCA"] <- "1"
-    dados$racaCor[dados$racaCor == "PARDA"] <- "2"
-    dados$racaCor[dados$racaCor == "PRETA"] <- "3"
+    dados$racaCor[dados$racaCor == "PRETA"] <- "2"
+    dados$racaCor[dados$racaCor == "PARDA"] <- "3"
     dados$racaCor[dados$racaCor == "AMARELA"] <- "4"
     dados$racaCor[dados$racaCor == "INDIGENA"] <- "5"
-    dados$racaCor[dados$racaCor == "IGNORADO"] <- "9"
+    dados$racaCor[dados$racaCor == "IGNORADO"] <- "6"
     dados$racaCor[dados$racaCor == ""] <- NA
     
   }
@@ -250,7 +259,7 @@ clean_esus <- function(dados){
     dados$contemComunidadeTradicional <- stringr::str_to_upper(dados$contemComunidadeTradicional)
     
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "SIM"] <- "1"
-    dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "NAO"] <- "0"
+    dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "NAO"] <- "2"
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == ""] <- NA
     
     }
@@ -267,45 +276,45 @@ clean_esus <- function(dados){
     dados$comunidadeTradicional <- stringr::str_trim(dados$comunidadeTradicional, side = "both")
     dados$comunidadeTradicional <- stringr::str_squish(dados$comunidadeTradicional)
     
-    dados$comunidadeTradicional[dados$comunidadeTradicional == "ACAMPADA"] <- "1"
-    dados$comunidadeTradicional[dados$comunidadeTradicional == "AGROEXTRATIVISTAS"] <- "2"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "ANDIROBEIRAS"] <- "3"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "APATRIDAS"] <- "4"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ASSENTADA"] <- "5"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CAATINGUEIROS"] <- "6"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CAICARAS"] <- "7"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAMPONESES"] <- "8"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CASTANHEIRAS"] <- "9"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CATADORES DE MANGABA"] <- "10"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CERRADO"] <- "11"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CIGANOS"] <- "12"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "COMUNIDADES DE FUNDO E FECHO DE PASTO"] <- "13"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "EXTRATIVISTAS"] <- "14"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "FAXINALENSES"] <- "15"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "GERAIZEIROS"] <- "16"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ISQUEIROS"] <- "17"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "JANGADEIROS"] <- "18"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MARISQUEIROS"] <- "19"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MIGRANTES"] <- "20"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MORROQUIANOS"] <- "21"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "PANTANEIROS"] <- "22"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAIS"] <- "23"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POMERANOS"] <- "24"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACAO CIRCENSE"] <- "25"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACOES ATINGIDAS POR BARRAGENS"] <- "26"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS DE TERREIRO / MATRIZ AFRICANA"] <- "27"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS INDIGENAS"] <- "28"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS QUILOMBOLAS"] <- "29"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "QUEBRADEIRAS DE COCO BABACU"] <- "30"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "REFUGIADOS"] <- "31"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "RETIREIROS"] <- "32"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "RIBEIRINHOS"] <- "33"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "SERINGUEIROS"] <- "34"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS ASSALARIADOS"] <- "35"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS TEMPORARIOS"] <- "36"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "VARJEIROS"] <- "37"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "VAZANTEIROS"] <- "38"
-	  dados$comunidadeTradicional[dados$comunidadeTradicional == "OUTROS"] <- "99"
+    dados$comunidadeTradicional[dados$comunidadeTradicional == "AGROEXTRATIVISTAS"] <- "1"
+    dados$comunidadeTradicional[dados$comunidadeTradicional == "CAATINGUEIROS"] <- "2"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CAICARAS"] <- "3"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "CERRADO"] <- "4"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CIGANOS"] <- "5"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "COMUNIDADES DE FUNDO E FECHO DE PASTO"] <- "6"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "EXTRATIVISTAS"] <- "7"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "FAXINALENSES"] <- "8"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "GERAIZEIROS"] <- "9"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "MARISQUEIROS"] <- "10"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "PANTANEIROS"] <- "11"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAISANOS"] <- "12"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "POMERANOS"] <- "13"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS INDIGENAS"] <- "14"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS QUILOMBOLAS"] <- "15"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "QUEBRADEIRAS DE COCO BABACU"] <- "16"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "RETIREIROS"] <- "17"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "RIBEIRINHOS"] <- "18"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "SERINGUEIROS"] <- "19"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS DE TERREIRO / MATRIZ AFRICANA"] <- "20"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "VAZANTEIROS"] <- "21"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "OUTROS"] <- "22"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ACAMPADA"] <- "23"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ANDIROBEIRAS"] <- "24"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "APATRIDAS"] <- "25"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ASSENTADA"] <- "26"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CAMPONESES"] <- "27"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CASTANHEIRAS"] <- "28"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "CATADORES DE MANGABA"] <- "29"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "ISQUEIROS"] <- "30"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "JANGADEIROS"] <- "31"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MIGRANTES"] <- "32"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "MORROQUIANOS"] <- "33"
+    dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACOES ATINGIDAS POR BARRAGENS"] <- "34"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "POPULACAO CIRCENSE"] <- "35"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "REFUGIADOS"] <- "36"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS ASSALARIADOS"] <- "37"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "TRABALHADORES RURAIS TEMPORARIOS"] <- "38"
+	  dados$comunidadeTradicional[dados$comunidadeTradicional == "VARJEIROS"] <- "39"
 		
     dados$comunidadeTradicional[dados$comunidadeTradicional == ""] <- NA
     
@@ -323,7 +332,7 @@ clean_esus <- function(dados){
     dados$profissionalSaude <- stringr::str_to_upper(dados$profissionalSaude)
     
     dados$profissionalSaude[dados$profissionalSaude == "SIM"] <- "1"
-    dados$profissionalSaude[dados$profissionalSaude == "NAO"] <- "0"
+    dados$profissionalSaude[dados$profissionalSaude == "NAO"] <- "2"
     dados$profissionalSaude[dados$profissionalSaude == ""] <- NA
     
   }
@@ -340,7 +349,7 @@ clean_esus <- function(dados){
     dados$profissionalSeguranca <- stringr::str_to_upper(dados$profissionalSeguranca)
     
     dados$profissionalSeguranca[dados$profissionalSeguranca == "SIM"] <- "1"
-    dados$profissionalSeguranca[dados$profissionalSeguranca == "NAO"] <- "0"
+    dados$profissionalSeguranca[dados$profissionalSeguranca == "NAO"] <- "2"
     dados$profissionalSeguranca[dados$profissionalSeguranca == ""] <- NA
     
   }
@@ -357,7 +366,7 @@ clean_esus <- function(dados){
     dados$estrangeiro <- stringr::str_to_upper(dados$estrangeiro)
     
     dados$estrangeiro[dados$estrangeiro == "SIM"] <- "1"
-    dados$estrangeiro[dados$estrangeiro == "NAO"] <- "0"
+    dados$estrangeiro[dados$estrangeiro == "NAO"] <- "2"
     dados$estrangeiro[dados$estrangeiro == ""] <- NA
     
   }
@@ -535,7 +544,7 @@ clean_esus <- function(dados){
     
     dados$resultadoTeste[dados$resultadoTeste == "POSITIVO"] <- "1"
     dados$resultadoTeste[dados$resultadoTeste == "NEGATIVO"] <- "2"
-    dados$resultadoTeste[dados$resultadoTeste == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTeste[dados$resultadoTeste == "INCONCLUSIVO OU INDETERMINADO"] <- "3"
     dados$resultadoTeste[dados$resultadoTeste == ""] <- NA
     
   }
@@ -555,7 +564,7 @@ clean_esus <- function(dados){
     
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "NAO REAGENTE"] <- "2"
-    dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == "INCONCLUSIVO OU INDETERMINADO"] <- "3"
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == ""] <- NA
     
   }
@@ -575,7 +584,7 @@ clean_esus <- function(dados){
     
     dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "NAO REAGENTE"] <- "2"
-    dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == "INCONCLUSIVO OU INDETERMINADO"] <- "3"
     dados$resultadoTesteSorologicoIgG[dados$resultadoTesteSorologicoIgG == ""] <- NA
     
   }
@@ -595,7 +604,7 @@ clean_esus <- function(dados){
     
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "NAO REAGENTE"] <- "2"
-    dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == "INCONCLUSIVO OU INDETERMINADO"] <- "3"
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == ""] <- NA
     
   }
@@ -615,7 +624,7 @@ clean_esus <- function(dados){
     
     dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "REAGENTE"] <- "1"
     dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "NAO REAGENTE"] <- "2"
-    dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "INCONCLUSIVO OU INDETERMINADO"] <- "9"
+    dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == "INCONCLUSIVO OU INDETERMINADO"] <- "3"
     dados$resultadoTesteSorologicoTotais[dados$resultadoTesteSorologicoTotais == ""] <- NA
     
   }
@@ -672,6 +681,8 @@ clean_esus <- function(dados){
   
   if("classificacaoFinal" %in% nomesVars){
     
+    dados$classificacaoFinal_orig <- as.character(dados$classificacaoFinal)
+    
     dados$classificacaoFinal <- as.character(dados$classificacaoFinal)
     
     dados$classificacaoFinal <- abjutils::rm_accent(dados$classificacaoFinal)
@@ -684,13 +695,15 @@ clean_esus <- function(dados){
     dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO LABORATORIAL"] <- "1"
     dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO EPIDEMIOLOGICO"] <- "2"
     dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO EPIDEMIOLOGICO"] <- "2"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO IMAGEM"] <- "3"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO IMAGEM"] <- "3"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO"] <- "4"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO"] <- "4"
-    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO POR CRITERIO CLINICO"] <- "4"
-    dados$classificacaoFinal[dados$classificacaoFinal == "SINDROME GRIPAL NAO ESPECIFICADA"] <- "5"
-    dados$classificacaoFinal[dados$classificacaoFinal == "DESCARTADO"] <- "6"
+    dados$classificacaoFinal[dados$classificacaoFinal == "DESCARTADO"] <- "3"
+    dados$classificacaoFinal[dados$classificacaoFinal == "SINDROME GRIPAL NAO ESPECIFICADA"] <- "4"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO IMAGEM"] <- "5"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO IMAGEM"] <- "5"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO"] <- "6"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO"] <- "6"
+    dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO POR CRITERIO CLINICO"] <- "6"
+    
+    
     
     dados$classificacaoFinal[dados$classificacaoFinal == ""] <- NA
     
@@ -709,13 +722,13 @@ clean_esus <- function(dados){
     dados$evolucaoCaso <- stringr::str_trim(dados$evolucaoCaso, side = "both")
     dados$evolucaoCaso <- stringr::str_squish(dados$evolucaoCaso)
     
-    dados$evolucaoCaso[dados$evolucaoCaso == "CURA"] <- "1"
-    dados$evolucaoCaso[dados$evolucaoCaso == "OBITO"] <- "2"
-    dados$evolucaoCaso[dados$evolucaoCaso == "EM TRATAMENTO DOMICILIAR"] <- "3"
-    dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO"] <- "4"
-    dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO EM UTI"] <- "5"
-    dados$evolucaoCaso[dados$evolucaoCaso == "IGNORADO"] <- "6"
-    dados$evolucaoCaso[dados$evolucaoCaso == "CANCELADO"] <- "9"
+    dados$evolucaoCaso[dados$evolucaoCaso == "CANCELADO"] <- "1"
+    dados$evolucaoCaso[dados$evolucaoCaso == "IGNORADO"] <- "2"
+    dados$evolucaoCaso[dados$evolucaoCaso == "OBITO"] <- "3"
+    dados$evolucaoCaso[dados$evolucaoCaso == "CURA"] <- "4"
+    dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO"] <- "5"
+    dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO EM UTI"] <- "6"
+    dados$evolucaoCaso[dados$evolucaoCaso == "EM TRATAMETNO DOMICILIAR"] <- "7"
     
     dados$evolucaoCaso[dados$evolucaoCaso == ""] <- NA
     
