@@ -182,7 +182,7 @@ clean_esus <- function(dados){
     dados$dataRegistro[dados$dataRegistro > Sys.Date()] <- NA
     
   }
-  print(names(dados) == "dataRegistro", 'Data Registro encontrada!')
+  print(paste(names(dados) == "dataRegistro", 'Data Registro encontrada!'))
   
   # DATA DA ATUALIZACAO DO REGISTRO
   
@@ -197,7 +197,7 @@ clean_esus <- function(dados){
     
   }
   
-  print(names(dados) == "dataAtualizacao", 'Data atualizacao encontrada!')
+  print(paste(names(dados) == "dataAtualizacao", 'Data atualizacao encontrada!'))
   
   print('Tratamento das datas concluido')
   
