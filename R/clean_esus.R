@@ -186,8 +186,9 @@ clean_esus <- function(dados){
   
   # DATA DA ATUALIZACAO DO REGISTRO
   
-  if("updated_at" %in% nomesVars){
-    
+  if(any(grepl("updated_at",nomesVars))){
+
+    #colnames(dados)[grepl("updated_at",colnames(dados))]  <- "dataAtualizacao"
     names(dados)[names(dados) == "updated_at"] <- "dataAtualizacao"
     
     dados$dataAtualizacao <- lubridate::as_date(dados$dataAtualizacao)
