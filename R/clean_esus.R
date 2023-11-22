@@ -35,8 +35,8 @@ clean_esus <- function(dados){
   # Validando o nome das variáveis para evitar carregamento com "X." ou "X_" por exemplo "X_update_at" vai ficar "update_at"
   # Validando o nome de variáveis que iniciam com _ para evitar erro, removendo o _ exemplo _update_at fica update_at
 
-  if (any(grepl("^[_]|^X[_|.]",nomesVars))){
-    names(dados) <- gsub(nomesVars,pattern ="^[_]|^X[_|.]", replacement = "", ignore.case = T)
+  if (any(grepl("^[_|@]|^X[_|.]",nomesVars))){
+    names(dados) <- gsub(nomesVars,pattern ="^[_|@]|^X[_|.]", replacement = "", ignore.case = T)
     
   } 
   
@@ -182,7 +182,7 @@ clean_esus <- function(dados){
     dados$dataRegistro[dados$dataRegistro > Sys.Date()] <- NA
     
   }
-  
+  print(names(dados) == "dataRegistro", 'Data Registro encontrada!')
   
   # DATA DA ATUALIZACAO DO REGISTRO
   
@@ -196,6 +196,8 @@ clean_esus <- function(dados){
     dados$dataAtualizacao[dados$dataAtualizacao > Sys.Date()] <- NA
     
   }
+  
+  print(names(dados) == "dataAtualizacao", 'Data atualizacao encontrada!')
   
   print('Tratamento das datas concluido')
   
