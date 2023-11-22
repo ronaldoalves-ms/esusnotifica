@@ -57,6 +57,7 @@ clean_esus <- function(dados){
     dados$nomeCompleto[dados$nomeCompleto == ""] <- NA
     
   }
+  print('Tratamento do nome concluído')
   
   
   # NOME DA MAE
@@ -75,6 +76,7 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento nome da mãe concluido')
   
   # NOME DO LOGRADOURO DE RESIDENCIA
   
@@ -92,6 +94,8 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento logradouro concluido')
+  
   
   # DATA DE NASCIMENTO
   
@@ -103,6 +107,8 @@ clean_esus <- function(dados){
     dados$dataNascimento[dados$dataNascimento > Sys.Date()] <- NA
     
   }
+  
+  print('Tratamento data de nascimento concluido')
   
   
   # DATA DO INICIO DOS SINTOMAS
@@ -192,6 +198,7 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento das datas concluido')
   
   # SEXO
   
@@ -209,6 +216,8 @@ clean_esus <- function(dados){
     dados$sexo[dados$sexo == ""] <- NA
     
   }
+  
+  print('Tratamento sexo concluido')
   
   
   # RACA/COR
@@ -245,7 +254,9 @@ clean_esus <- function(dados){
     
     dados$etnia[dados$etnia == ""] <- NA
     
-    }
+  }
+  
+  print('Tratamento raca cor e etnia concluido')
   
   
   # COMUNIDADE TRADICIONAL (I)
@@ -319,7 +330,7 @@ clean_esus <- function(dados){
     dados$comunidadeTradicional[dados$comunidadeTradicional == ""] <- NA
     
     }
-  
+  print('Tratamento comunidade tradicional concluido')
   
   # PROFISSIONAL DA SAUDE
   
@@ -370,6 +381,8 @@ clean_esus <- function(dados){
     dados$estrangeiro[dados$estrangeiro == ""] <- NA
     
   }
+  
+  print('Tratamento profissao e origem concluid')
   
   
   # ESTADO DE RESIDENCIA
@@ -494,7 +507,7 @@ clean_esus <- function(dados){
     dados$municipioNotificacao[dados$municipioNotificacao == ""] <- NA
     
   }
-  
+  print('Tratamento uf/municipio de residencia e notificacao concluido')
   
   # CBO
   
@@ -512,6 +525,8 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento cbo concluido')
+  
   
   # PAIS DE ORIGEM
   
@@ -528,6 +543,7 @@ clean_esus <- function(dados){
     dados$paisOrigem[dados$paisOrigem == ""] <- NA
     
   }
+  print('Tratamento pais concluido')
   
    
   # RESULTADO DO TESTE (PCR/TESTE RAPIDO)
@@ -709,6 +725,8 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento testes concluido')
+  
   
   # EVOLUCAO CASO
   
@@ -733,6 +751,7 @@ clean_esus <- function(dados){
     dados$evolucaoCaso[dados$evolucaoCaso == ""] <- NA
     
   }
+  print('Tratamento evolucao concluido')
   
   
   # SINTOMAS
@@ -751,6 +770,8 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento sintomas concluido')
+  
   
   # CONDICOES
   
@@ -767,6 +788,8 @@ clean_esus <- function(dados){
     dados$condicoes[dados$condicoes == ""] <- NA
     
   }
+  
+  print('Tratamento condicoes concluido')
 	
 
   ## PARTE 2
@@ -783,6 +806,7 @@ clean_esus <- function(dados){
     
   }
   
+  print('Tratamento estado teste concluido')
   
   # CLASSIFICACAO FINAL (2)
   
@@ -805,6 +829,7 @@ clean_esus <- function(dados){
         TRUE ~ classificacaoFinal))
     
   }
+  print('Tratamento resultado testes concluido')
   
   # CLASSIFICACAO FINAL (3)
   # Verificando o resultado dos exames na variável testes 
@@ -847,6 +872,8 @@ clean_esus <- function(dados){
     dados$idade <- as.integer(dados$idade)
     
   }
+  
+  print('Tratamento idade concluido')
 
   
   # FAIXA-ETARIA (3)
