@@ -35,7 +35,7 @@ clean_esus <- function(dados){
   # Validando o nome das variáveis para evitar carregamento com "X." ou "X_" por exemplo "X_update_at" vai ficar "update_at"
   # Validando o nome de variáveis que iniciam com _ para evitar erro, removendo o _ exemplo _update_at fica update_at
 
-  if (any(grepl("^[_|@]|^X[_|.]",namesVars))){
+  if (any(grepl("^[_|@]|^X[_|.]",nomesVars))){
     names(dados) <- gsub(nomesVars,pattern ="^[_|@]|^X[_|.]", replacement = "", ignore.case = T)
     
   } 
