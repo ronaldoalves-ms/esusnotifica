@@ -29,8 +29,7 @@
 
 
 clean_esus <- function(dados){
-  
-  
+  print('Iniciando tratamento')
   nomesVars <- names(dados)
   
   # Validando o nome das variáveis para evitar carregamento com "X." ou "X_" por exemplo "X_update_at" vai ficar "update_at"
