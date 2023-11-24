@@ -56,8 +56,6 @@ clean_esus <- function(dados){
     dados$nomeCompleto[dados$nomeCompleto == ""] <- NA
     
   }
-  print('Tratamento do nome concluído')
-  
   
   # NOME DA MAE
   
@@ -75,8 +73,6 @@ clean_esus <- function(dados){
     
   }
   
-  print('Tratamento nome da mãe concluido')
-  
   # NOME DO LOGRADOURO DE RESIDENCIA
   
   if("logradouro" %in% nomesVars){
@@ -93,9 +89,6 @@ clean_esus <- function(dados){
     
   }
   
-  print('Tratamento logradouro concluido')
-  
-  
   # DATA DE NASCIMENTO
   
   if("dataNascimento" %in% nomesVars){
@@ -106,9 +99,6 @@ clean_esus <- function(dados){
     dados$dataNascimento[dados$dataNascimento > Sys.Date()] <- NA
     
   }
-  
-  print('Tratamento data de nascimento concluido')
-  
   
   # DATA DO INICIO DOS SINTOMAS
   
@@ -121,7 +111,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # DATA DA NOTIFICACAO
   
   if("dataNotificacao" %in% nomesVars){
@@ -132,7 +121,6 @@ clean_esus <- function(dados){
     dados$dataNotificacao[dados$dataNotificacao > Sys.Date()] <- NA
     
   }
-  
   
   # DATA DO TESTE (PCR/TESTE RAPIDO)
   
@@ -145,7 +133,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # DATA DO TESTE SOROLOGICO
   
   if("dataTesteSorologico" %in% nomesVars){
@@ -157,7 +144,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # DATA DE ENCERRAMENTO
   
   if("dataEncerramento" %in% nomesVars){
@@ -168,7 +154,6 @@ clean_esus <- function(dados){
     dados$dataEncerramento[dados$dataEncerramento > Sys.Date()] <- NA
     
   }
-  
   
   # DATA DA CRIACAO DO REGISTRO
   
@@ -198,10 +183,6 @@ clean_esus <- function(dados){
     
   }
   
-  print(paste(any(names(dados) == "dataAtualizacao"), 'Data atualizacao encontrada!'))
-  
-  print('Tratamento das datas concluido')
-  
   # SEXO
   
   if("sexo" %in% nomesVars){
@@ -218,9 +199,6 @@ clean_esus <- function(dados){
     dados$sexo[dados$sexo == ""] <- NA
     
   }
-  
-  print('Tratamento sexo concluido')
-  
   
   # RACA/COR
   
@@ -242,7 +220,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # ETNIA
   
   if("etnia" %in% nomesVars){
@@ -257,9 +234,6 @@ clean_esus <- function(dados){
     dados$etnia[dados$etnia == ""] <- NA
     
   }
-  
-  print('Tratamento raca cor e etnia concluido')
-  
   
   # COMUNIDADE TRADICIONAL (I)
   
@@ -276,7 +250,6 @@ clean_esus <- function(dados){
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == ""] <- NA
     
     }
-  
   
   # COMUNIDADE TRADICIONAL (II)
   
@@ -332,7 +305,6 @@ clean_esus <- function(dados){
     dados$comunidadeTradicional[dados$comunidadeTradicional == ""] <- NA
     
     }
-  print('Tratamento comunidade tradicional concluido')
   
   # PROFISSIONAL DA SAUDE
   
@@ -350,7 +322,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # PROFISSIONAL DA SEGURANCA
   
   if("profissionalSeguranca" %in% nomesVars){
@@ -367,7 +338,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # ESTRANGEIRO
   
   if("estrangeiro" %in% nomesVars){
@@ -383,9 +353,6 @@ clean_esus <- function(dados){
     dados$estrangeiro[dados$estrangeiro == ""] <- NA
     
   }
-  
-  print('Tratamento profissao e origem concluid')
-  
   
   # ESTADO DE RESIDENCIA
   
@@ -431,7 +398,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # ESTADO DE NOTIFICACAO
   
   if("estadoNotificacao" %in% nomesVars){
@@ -476,7 +442,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # MUNICIPIO DE RESIDENCIA
   
   if("municipio" %in% nomesVars){
@@ -493,7 +458,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # MUNICIPIO DE NOTIFICACAO
   
   if("municipioNotificacao" %in% nomesVars){
@@ -509,7 +473,6 @@ clean_esus <- function(dados){
     dados$municipioNotificacao[dados$municipioNotificacao == ""] <- NA
     
   }
-  print('Tratamento uf/municipio de residencia e notificacao concluido')
   
   # CBO
   
@@ -527,9 +490,6 @@ clean_esus <- function(dados){
     
   }
   
-  print('Tratamento cbo concluido')
-  
-  
   # PAIS DE ORIGEM
   
   if("paisOrigem" %in% nomesVars){
@@ -545,8 +505,6 @@ clean_esus <- function(dados){
     dados$paisOrigem[dados$paisOrigem == ""] <- NA
     
   }
-  print('Tratamento pais concluido')
-  
    
   # RESULTADO DO TESTE (PCR/TESTE RAPIDO)
   
@@ -567,7 +525,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # RESULTADO DO TESTE SOROLOGICO IGA
   
   if("resultadoTesteSorologicoIgA" %in% nomesVars){
@@ -586,7 +543,6 @@ clean_esus <- function(dados){
     dados$resultadoTesteSorologicoIgA[dados$resultadoTesteSorologicoIgA == ""] <- NA
     
   }
-  
   
   # RESULTADO DO TESTE SOROLOGICO IGG
   
@@ -607,7 +563,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # RESULTADO DO TESTE SOROLOGICO IGM
   
   if("resultadoTesteSorologicoIgM" %in% nomesVars){
@@ -626,7 +581,6 @@ clean_esus <- function(dados){
     dados$resultadoTesteSorologicoIgM[dados$resultadoTesteSorologicoIgM == ""] <- NA
     
   }
-  
   
   # RESULTADO DO TESTE SOROLOGICO ANTICORPOS TOTAIS
   
@@ -647,7 +601,6 @@ clean_esus <- function(dados){
     
   }
   
-  
   # ESTADO DO TESTE (PCR/TESTE RAPIDO)
   
   if("estadoTeste" %in% nomesVars){
@@ -667,7 +620,6 @@ clean_esus <- function(dados){
     dados$estadoTeste[dados$estadoTeste == ""] <- NA
     
   }
-  
   
   # TIPO DE TESTE
   
@@ -694,13 +646,11 @@ clean_esus <- function(dados){
     
   }
   
-  
   # CLASSIFICACAO FINAL
   
   if("classificacaoFinal" %in% nomesVars){
-    
+    #criando variavel para manter o dado original da variavel classificacaoFinal para consulta
     dados$classificacaoFinal_orig <- as.character(dados$classificacaoFinal)
-    
     dados$classificacaoFinal <- as.character(dados$classificacaoFinal)
     
     dados$classificacaoFinal <- abjutils::rm_accent(dados$classificacaoFinal)
@@ -720,15 +670,9 @@ clean_esus <- function(dados){
     dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMACAO CLINICO"] <- "6"
     dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO CLINICO"] <- "6"
     dados$classificacaoFinal[dados$classificacaoFinal == "CONFIRMADO POR CRITERIO CLINICO"] <- "6"
-    
-    
-    
     dados$classificacaoFinal[dados$classificacaoFinal == ""] <- NA
     
   }
-  
-  print('Tratamento testes concluido')
-  
   
   # EVOLUCAO CASO
   
@@ -753,8 +697,6 @@ clean_esus <- function(dados){
     dados$evolucaoCaso[dados$evolucaoCaso == ""] <- NA
     
   }
-  print('Tratamento evolucao concluido')
-  
   
   # SINTOMAS
   
@@ -772,9 +714,6 @@ clean_esus <- function(dados){
     
   }
   
-  print('Tratamento sintomas concluido')
-  
-  
   # CONDICOES
   
   if("condicoes" %in% nomesVars){
@@ -790,12 +729,8 @@ clean_esus <- function(dados){
     dados$condicoes[dados$condicoes == ""] <- NA
     
   }
-  
-  print('Tratamento condicoes concluido')
-	
 
   ## PARTE 2
-  
   
   # ESTADO DO TESTE (2)
   
@@ -807,8 +742,6 @@ clean_esus <- function(dados){
                                      TRUE ~ estadoTeste))
     
   }
-  
-  print('Tratamento estado teste concluido')
   
   # CLASSIFICACAO FINAL (2)
   
@@ -831,7 +764,6 @@ clean_esus <- function(dados){
         TRUE ~ classificacaoFinal))
     
   }
-  print('Tratamento resultado testes concluido')
   
   # CLASSIFICACAO FINAL (3)
   # Verificando o resultado dos exames na variável testes 
@@ -874,9 +806,6 @@ clean_esus <- function(dados){
     dados$idade <- as.integer(dados$idade)
     
   }
-  
-  print('Tratamento idade concluido')
-
   
   # FAIXA-ETARIA (3)
   
