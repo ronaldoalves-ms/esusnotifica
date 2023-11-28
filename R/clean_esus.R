@@ -29,7 +29,7 @@
 
 
 clean_esus <- function(dados){
-  print('Iniciando tratamento')
+  
   nomesVars <- names(dados)
   
   # Validando o nome das variáveis para evitar carregamento com "X." ou "X_" por exemplo "X_update_at" vai ficar "update_at"
@@ -39,7 +39,6 @@ clean_esus <- function(dados){
     names(dados) <- gsub(nomesVars,pattern ="^[_|@]|^X[_|.]", replacement = "", ignore.case = T)
     
   } 
-  
   
   # NOME COMPLETO
   
@@ -167,7 +166,6 @@ clean_esus <- function(dados){
     dados$dataRegistro[dados$dataRegistro > Sys.Date()] <- NA
     
   }
-  print(paste(any(names(dados) == "dataRegistro"), 'Data Registro encontrada!'))
   
   # DATA DA ATUALIZACAO DO REGISTRO
   
@@ -249,7 +247,7 @@ clean_esus <- function(dados){
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == "NAO"] <- "2"
     dados$contemComunidadeTradicional[dados$contemComunidadeTradicional == ""] <- NA
     
-    }
+  }
   
   # COMUNIDADE TRADICIONAL (II)
   
@@ -304,7 +302,7 @@ clean_esus <- function(dados){
 		
     dados$comunidadeTradicional[dados$comunidadeTradicional == ""] <- NA
     
-    }
+  }
   
   # PROFISSIONAL DA SAUDE
   
