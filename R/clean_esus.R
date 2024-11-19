@@ -209,8 +209,10 @@ clean_esus <- function(dados){
     dados$racaCor <- stringr::str_to_upper(dados$racaCor)
     
     dados$racaCor[dados$racaCor == "BRANCA"] <- "1"
+    dados$racaCor[dados$racaCor == "BRANCO"] <- "1"
     dados$racaCor[dados$racaCor == "PRETA"] <- "2"
     dados$racaCor[dados$racaCor == "PARDA"] <- "3"
+    dados$racaCor[dados$racaCor == "PARDO"] <- "3"
     dados$racaCor[dados$racaCor == "AMARELA"] <- "4"
     dados$racaCor[dados$racaCor == "INDIGENA"] <- "5"
     dados$racaCor[dados$racaCor == "IGNORADO"] <- "6"
@@ -271,7 +273,7 @@ clean_esus <- function(dados){
   	dados$comunidadeTradicional[dados$comunidadeTradicional == "GERAIZEIROS"] <- "9"
   	dados$comunidadeTradicional[dados$comunidadeTradicional == "MARISQUEIROS"] <- "10"
   	dados$comunidadeTradicional[dados$comunidadeTradicional == "PANTANEIROS"] <- "11"
-  	dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAISANOS"] <- "12"
+  	dados$comunidadeTradicional[dados$comunidadeTradicional == "PESCADORES ARTESANAIS"] <- "12"
   	dados$comunidadeTradicional[dados$comunidadeTradicional == "POMERANOS"] <- "13"
   	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS INDIGENAS"] <- "14"
   	dados$comunidadeTradicional[dados$comunidadeTradicional == "POVOS QUILOMBOLAS"] <- "15"
@@ -690,7 +692,7 @@ clean_esus <- function(dados){
     dados$evolucaoCaso[dados$evolucaoCaso == "CURA"] <- "4"
     dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO"] <- "5"
     dados$evolucaoCaso[dados$evolucaoCaso == "INTERNADO EM UTI"] <- "6"
-    dados$evolucaoCaso[dados$evolucaoCaso == "EM TRATAMETNO DOMICILIAR"] <- "7"
+    dados$evolucaoCaso[dados$evolucaoCaso == "EM TRATAMENTO DOMICILIAR"] <- "7"
     
     dados$evolucaoCaso[dados$evolucaoCaso == ""] <- NA
     
