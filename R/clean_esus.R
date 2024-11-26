@@ -202,6 +202,8 @@ clean_esus <- function(dados){
   
   if("racaCor" %in% nomesVars){
     
+    #criando variavel para manter o dado original da variavel racaCor para consulta
+    dados$racaCor_orig <- as.character(dados$racaCor)
     dados$racaCor <- as.character(dados$racaCor)
     
     dados$racaCor <- abjutils::rm_accent(dados$racaCor)
@@ -255,6 +257,8 @@ clean_esus <- function(dados){
   
   if("comunidadeTradicional" %in% nomesVars){
   
+    #criando variavel para manter o dado original da variavel comunidadeTradicional para consulta
+    dados$comunidadeTradicional_orig <- as.character(dados$comunidadeTradicional)
     dados$comunidadeTradicional <- as.character(dados$comunidadeTradicional)
     
     dados$comunidadeTradicional <- abjutils::rm_accent(dados$comunidadeTradicional)
@@ -678,6 +682,8 @@ clean_esus <- function(dados){
   
   if("evolucaoCaso" %in% nomesVars){
     
+    #criando variavel para manter o dado original da variavel evolucaoCaso para consulta
+    dados$evolucaoCaso_orig <- as.character(dados$evolucaoCaso)
     dados$evolucaoCaso <- as.character(dados$evolucaoCaso)
     
     dados$evolucaoCaso <- abjutils::rm_accent(dados$evolucaoCaso)
